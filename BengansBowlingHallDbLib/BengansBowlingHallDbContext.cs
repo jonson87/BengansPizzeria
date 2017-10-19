@@ -11,5 +11,8 @@ namespace BengansBowlingHallDbLib
         }
 
         public DbSet<Party> Parties { get; set; }
+        public DbSet<Accountability> Accountabilities { get; set; }
+        public DbSet<AccountabilityType> AccountabilityTypes { get; set; }
+        
     }
 }
