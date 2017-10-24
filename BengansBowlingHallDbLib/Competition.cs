@@ -11,5 +11,6 @@ namespace BengansBowlingHallDbLib
         public string Name { get; set; }
         public int PeriodId { get; set; }
         public TimePeriod Period { get; set; }
+        public List<Match> Matches { get; set; }
     }
 }
