@@ -22,5 +22,33 @@ namespace BengansBowlingHallDbLib
 
             return party;
         }
+
+        public Match RegisterMatch(string name, Party playerOne, Party playerTwo, Party winner)
+        {
+            var match = new Match {Name = name, PlayerOne = playerOne, PlayerTwo = playerTwo, Winner = winner};
+            _context.Matches.Add(match);
+            _context.SaveChanges();
+
+            return match;
+        }
+
+        public Serie RegisterSerie(int score)
+        {
+            var serie = new Serie {Score = score};
+            _context.Series.Add(serie);
+            _context.SaveChanges();
+
+            return serie;
+        }
+
+        public Round RegisterRound(Serie serieOne, Serie serieTwo, Match match)
+        {
+            var round = new Round {SerieOne = serieOne, SerieTwo = serieTwo, Match = match };
+            _context.Rounds.Add(round);
+            _context.SaveChanges();
+
+            return round;
+        }
+        
     }
 }

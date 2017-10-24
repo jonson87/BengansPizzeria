@@ -11,5 +11,7 @@ namespace BengansBowlingHallDbLib
         public Serie SerieOne { get; set; }
         public int SerieTwoId { get; set; }
         public Serie SerieTwo { get; set; }
+        public int MatchId { get; set; }
+        public Match Match { get; set; }
     }
 }

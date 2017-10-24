@@ -24,6 +24,12 @@ namespace BengansBowlingIntegrationTestsLib
             repo.RegisterMember("Donny", "8123123984", "1239283901", "min@mail.com");
             repo.RegisterMember("Jonny", "8103921914", "1239121211", "min@mail.com");
 
+            repo.RegisterMatch("Match1", _context.Parties.FirstOrDefaultAsync(x => x.Name == "Benny").Result,
+                _context.Parties.FirstOrDefaultAsync(x => x.Name == "Danny").Result,
+                _context.Parties.FirstOrDefaultAsync(x => x.Name == "Benny").Result);
+
+            
+
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
         }
