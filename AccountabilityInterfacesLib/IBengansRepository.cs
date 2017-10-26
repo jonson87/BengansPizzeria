@@ -5,6 +5,6 @@ namespace AccountabilityInterfacesLib
 {
     public interface IBengansRepository
     {
-        Party RegisterMember(int id,string name, string legalId, string phone, string email);
+        Party RegisterMember(string name, string legalId, string phone, string email);
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accountabilities", "Accountabilities", "{6107DCB6-7F4E-439D-9B44-2075F7966B71}"
 EndProject
@@ -15,13 +15,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AccountabilityInterface", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountabilityInterfacesLib", "AccountabilityInterfacesLib\AccountabilityInterfacesLib.csproj", "{9A3CEABC-F100-419B-9883-DB7055EE6BBE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BengansBowlingIntegrationTest", "BengansBowlingIntegrationTest", "{3C5461D3-F904-46EC-A53C-E8E8590770A5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BengansBowlingUnitTest", "BengansBowlingUnitTest", "{3C5461D3-F904-46EC-A53C-E8E8590770A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BengansBowlingIntegrationTestsLib", "BengansBowlingIntegrationTestsLib\BengansBowlingIntegrationTestsLib.csproj", "{04169D28-8B4D-4F3E-852C-E8533D53D8AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BengansBowlingUnitTestsLib", "BengansBowlingIntegrationTestsLib\BengansBowlingUnitTestsLib.csproj", "{04169D28-8B4D-4F3E-852C-E8533D53D8AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Measurement", "Measurement", "{7C4571EB-FAA5-44F1-9BB7-3F177BE8623F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeasurementLib", "MeasurementLib\MeasurementLib.csproj", "{9C6682AB-89A7-404C-B922-154F6D13E82A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeasurementLib", "MeasurementLib\MeasurementLib.csproj", "{9C6682AB-89A7-404C-B922-154F6D13E82A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BengansBowlingIntegrationTests", "BengansBowlingIntegrationTests", "{EDBE3C55-0E7E-422B-B022-8D83412C16AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BengansBowlingIntegrationsTestsLib", "BengansBowlingIntegrationsTestsLib\BengansBowlingIntegrationsTestsLib.csproj", "{22D1DFEC-30A8-4685-82C0-37FF374AC6A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +53,10 @@ Global
 		{9C6682AB-89A7-404C-B922-154F6D13E82A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C6682AB-89A7-404C-B922-154F6D13E82A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C6682AB-89A7-404C-B922-154F6D13E82A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22D1DFEC-30A8-4685-82C0-37FF374AC6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22D1DFEC-30A8-4685-82C0-37FF374AC6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22D1DFEC-30A8-4685-82C0-37FF374AC6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22D1DFEC-30A8-4685-82C0-37FF374AC6A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +67,7 @@ Global
 		{9A3CEABC-F100-419B-9883-DB7055EE6BBE} = {A5968C70-8D7D-4BFA-B1E8-5511C106542D}
 		{04169D28-8B4D-4F3E-852C-E8533D53D8AE} = {3C5461D3-F904-46EC-A53C-E8E8590770A5}
 		{9C6682AB-89A7-404C-B922-154F6D13E82A} = {7C4571EB-FAA5-44F1-9BB7-3F177BE8623F}
+		{22D1DFEC-30A8-4685-82C0-37FF374AC6A5} = {EDBE3C55-0E7E-422B-B022-8D83412C16AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D354EC6-4C4F-4F82-8F13-64AB6D251F22}

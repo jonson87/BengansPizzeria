@@ -9,34 +9,37 @@ namespace BengansBowlingHallDbLib
 {
     public class BengansRepository: IBengansRepository
     {
-        //private BengansBowlingHallDbContext _context;
+        private BengansBowlingHallDbContext _context;
         public List<Party> Parties;
         public List<Match> Matches;
         public List<Round> Rounds;
         public List<Serie> Series;
 
-        public BengansRepository()
+        public BengansRepository(BengansBowlingHallDbContext context)
         {
+            _context = context;
             Parties = new List<Party>();
             Matches = new List<Match>();
             Rounds = new List<Round>();
             Series = new List<Serie>();
         }
 
-        public Party RegisterMember(int id,string name, string legalId, string phone, string email)
+        public Party RegisterMember(string name, string legalId, string phone, string email)
         {
             var party = new Party { Name = name, LegalId = legalId, Email = email, Phone = phone };
-            Parties.Add(party);
-            //_context.SaveChanges();
+            //Parties.Add(party);
+            _context.Parties.Add(party);
+            _context.SaveChanges();
 
             return party;
         }
 
-        public Match RegisterMatch(int id, Party playerOne, Party playerTwo)
+        public Match RegisterMatch(Party playerOne, Party playerTwo)
         {
-            var match = new Match {Id = id, PlayerOne = playerOne, PlayerTwo = playerTwo};
-            Matches.Add(match);
-            //_context.SaveChanges();
+            var match = new Match {PlayerOne = playerOne, PlayerTwo = playerTwo};
+            //Matches.Add(match);
+            _context.Matches.Add(match);
+            _context.SaveChanges();
 
             return match;
         }
@@ -59,10 +62,12 @@ namespace BengansBowlingHallDbLib
             return round;
         }
 
-        public Competition RegisterCompetition(int id, string name, TimePeriod period)
+        public Competition RegisterCompetition(string name, TimePeriod period, List<Match> matches)
         {
-            var competition = new Competition {Id = id, Name = name, Period = period};
-            return null;
+            var competition = new Competition {Name = name, Period = period, Matches = matches};
+            _context.Competitions.Add(competition);
+            _context.SaveChanges();
+            return competition;
         }
 
         public Match PlayMatch(int matchId)
@@ -76,9 +81,7 @@ namespace BengansBowlingHallDbLib
                 rounds.Add(new Round { Id = i });
             }
 
-            Rounds.AddRange(rounds);            
-
-            Random r = new Random();
+            Rounds.AddRange(rounds);   
 
             foreach (var round in rounds)
             {
@@ -86,7 +89,6 @@ namespace BengansBowlingHallDbLib
 
                 for (int i = Series.Count + 1; i <= Series.Count + 2; i++)
                 {
-                    //series.Add(new Serie { Id = i, Score = r.Next(80, 300) });
                     series.Add(new Serie { Id = i, Score = i+100 });
                 }
 
@@ -107,6 +109,5 @@ namespace BengansBowlingHallDbLib
 
             return match;
         }
-
     }
 }
