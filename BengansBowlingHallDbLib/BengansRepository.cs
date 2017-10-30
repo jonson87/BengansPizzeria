@@ -9,6 +9,9 @@ namespace BengansBowlingHallDbLib
 {
     public class BengansRepository: IBengansRepository
     {
+        //TODO Byt namn till t.ex. Bengans System. Systemet ska sedan i sin tur prata med repositories som i sin tur pratar med listor respektive context.
+        //TODO Byt ut kontruktörparametrarna så att den tar in repositories för varje enhet. T.ex. PartiesRepository och MatchesRepository
+
         private BengansBowlingHallDbContext _context;
         public List<Party> Parties;
         public List<Match> Matches;
