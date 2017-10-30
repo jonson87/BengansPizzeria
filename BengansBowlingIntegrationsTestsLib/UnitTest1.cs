@@ -15,11 +15,11 @@ namespace BengansBowlingIntegrationsTestsLib
         {
             var optionsBuilder = new DbContextOptionsBuilder<BengansBowlingHallDbContext>();
             optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-            //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BengansBowlingHallDb;Integrated Security=True;" +
-            //                            "Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;" +
-            //                            "MultiSubnetFailover=False");
+            //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BengansBowlingHallDb;Integrated Security=True;Connect Timeout=30;" +
+            //                            "Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             _context = new BengansBowlingHallDbContext(optionsBuilder.Options);
-
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
             repo = new BengansRepository(_context);
             repo.RegisterMember("Benny", "8705203984", "0708160404", "min@mail.com");
             repo.RegisterMember("Danny", "8705203234", "1293828311", "min@mail.com");
@@ -58,7 +58,6 @@ namespace BengansBowlingIntegrationsTestsLib
         public void GetCompetitionInformation()
         {
             var comp = _context.Competitions.FirstOrDefaultAsync(x => x.Id == 1).Result;
-            //var co = comp.Matches;
             Assert.Equal("BengansTävling", comp.Name);
         }
     }

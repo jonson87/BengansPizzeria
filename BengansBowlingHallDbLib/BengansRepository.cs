@@ -26,7 +26,7 @@ namespace BengansBowlingHallDbLib
 
         public Party RegisterMember(string name, string legalId, string phone, string email)
         {
-            var party = new Party { Name = name, LegalId = legalId, Email = email, Phone = phone };
+            var party = new Party {Name = name, LegalId = legalId, Email = email, Phone = phone };
             //Parties.Add(party);
             _context.Parties.Add(party);
             _context.SaveChanges();
