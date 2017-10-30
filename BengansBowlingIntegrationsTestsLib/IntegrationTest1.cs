@@ -1,20 +1,28 @@
-using BengansBowlingHallDbLib;
 using System;
-using AccountabilityLib;
-using Xunit;
 using System.Collections.Generic;
+using AccountabilityLib;
+using BengansBowlingHallDbLib;
+using Microsoft.EntityFrameworkCore;
+using Xunit;
 
-namespace BengansBowlingUnitTestsLib
+namespace BengansBowlingIntegrationsTestsLib
 {
-    public class UnitTest1
+    public class IntegrationTest1
     {
+        private BengansBowlingHallDbContext _context;
         private BengansRepository repo;
-
-        public UnitTest1()
+        public IntegrationTest1()
         {
-            repo = new BengansRepository();
+            var optionsBuilder = new DbContextOptionsBuilder<BengansBowlingHallDbContext>();
+            optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+            //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BengansBowlingHallDb;Integrated Security=True;" +
+            //                            "Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;" +
+            //                            "MultiSubnetFailover=False");
+            _context = new BengansBowlingHallDbContext(optionsBuilder.Options);
+
             var benny = new Party()
             {
+                PartyId = 1,
                 Name = "Benny",
                 LegalId = "8705203984",
                 Phone = "0708160404",
@@ -23,6 +31,7 @@ namespace BengansBowlingUnitTestsLib
 
             var danny = new Party()
             {
+                PartyId = 2,
                 Name = "Danny",
                 LegalId = "9105203234",
                 Phone = "1293828311",
@@ -31,6 +40,7 @@ namespace BengansBowlingUnitTestsLib
 
             var donny = new Party()
             {
+                PartyId = 3,
                 Name = "Donny",
                 LegalId = "9505203234",
                 Phone = "1239283901",
@@ -39,12 +49,14 @@ namespace BengansBowlingUnitTestsLib
 
             var johny = new Party()
             {
+                PartyId = 4,
                 Name = "Jonny",
                 LegalId = "7505203234",
                 Phone = "1239121211",
                 Email = "min@mail.com"
             };
 
+            repo = new BengansRepository(_context);
             repo.RegisterMember(benny);
             repo.RegisterMember(danny);
             repo.RegisterMember(donny);
@@ -52,9 +64,10 @@ namespace BengansBowlingUnitTestsLib
 
             var period = new TimePeriod
             {
-                Starttime = new DateTime(2017, 01, 01),
-                Endtime = new DateTime(2017, 12, 31)
-            };         
+                Id = 1,
+                Starttime = new DateTime(2017, 10, 23),
+                Endtime = new DateTime(2017, 10, 24)
+            };
 
             var match1 = new Match()
             {
@@ -136,24 +149,18 @@ namespace BengansBowlingUnitTestsLib
         }
 
         [Fact]
-        public void TestWinner()
+        public void GenerateMembers()
         {
-            var match = repo.PlayMatch(1);
-            Assert.Equal(repo.Parties[1], match.Winner);
-            //Assert.IsType(Party, match.Winner);
+            var parties = _context.Parties.ToListAsync().Result;
+            Assert.Equal(4, parties.Count);
         }
 
         [Fact]
-        public void TestWinnerOfTheYear()
+        public void GetCompetitionInformation()
         {
-            var match = repo.PlayMatch(1);
-            var match2 = repo.PlayMatch(2);
-            var match3 = repo.PlayMatch(3);
-            var match4 = repo.PlayMatch(4);
-            var match5 = repo.PlayMatch(5);
-            var match6 = repo.PlayMatch(6);
-            Assert.Equal(repo.Parties[1], match.Winner);
-            //Assert.IsType(Party, match.Winner);
+            var comp = _context.Competitions.FirstOrDefaultAsync(x => x.Id == 1).Result;
+            //var co = comp.Matches;
+            Assert.Equal("BengansTävling", comp.Name);
         }
     }
 }
