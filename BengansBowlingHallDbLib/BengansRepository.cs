@@ -15,6 +15,11 @@ namespace BengansBowlingHallDbLib
         public List<Round> Rounds;
         public List<Serie> Series;
 
+        public BengansRepository()
+        {
+
+        }
+
         public BengansRepository(BengansBowlingHallDbContext context)
         {
             _context = context;
@@ -24,50 +29,39 @@ namespace BengansBowlingHallDbLib
             Series = new List<Serie>();
         }
 
-        public Party RegisterMember(string name, string legalId, string phone, string email)
+        public void RegisterMember(Party member)
         {
-            var party = new Party { Name = name, LegalId = legalId, Email = email, Phone = phone };
+            var party = new Party { Name = member.Name, LegalId = member.LegalId, Email = member.Email, Phone = member.Phone };
             //Parties.Add(party);
             _context.Parties.Add(party);
             _context.SaveChanges();
-
-            return party;
         }
 
-        public Match RegisterMatch(Party playerOne, Party playerTwo)
+        public void RegisterMatch(Match match)
         {
-            var match = new Match {PlayerOne = playerOne, PlayerTwo = playerTwo};
             //Matches.Add(match);
             _context.Matches.Add(match);
             _context.SaveChanges();
-
-            return match;
         }
 
-        public Serie RegisterSerie(int id, int score)
+        public void RegisterSerie(int id, int score)
         {
             var serie = new Serie {Score = score};
             Series.Add(serie);
             //_context.SaveChanges();
-
-            return serie;
         }
 
-        public Round RegisterRound(int id,Serie serieOne, Serie serieTwo)
+        public void RegisterRound(int id,Serie serieOne, Serie serieTwo)
         {
             var round = new Round {SerieOne = serieOne, SerieTwo = serieTwo};
             Rounds.Add(round);
             //_context.SaveChanges();
-
-            return round;
         }
 
-        public Competition RegisterCompetition(string name, TimePeriod period, List<Match> matches)
+        public void RegisterCompetition(Competition competition)
         {
-            var competition = new Competition {Name = name, Period = period, Matches = matches};
             _context.Competitions.Add(competition);
             _context.SaveChanges();
-            return competition;
         }
 
         public Match PlayMatch(int matchId)
