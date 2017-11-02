@@ -4,139 +4,33 @@ using AccountabilityLib;
 using Xunit;
 using System.Collections.Generic;
 using BengansBowlingHallDbLib.Interfaces;
+using BengansBowlingHallDbLib.Repositories;
 
 namespace BengansBowlingUnitTestsLib
 {
     public class UnitTest1
     {
-        private BengansSystem bengansSystem;
-        private IBengansRepository IBR;
-
-        //TODO Bryt ut all datagenerering till testmetoder. Testmetod "CreateMatches" kan t.ex. skapa matcher och kontrollera genom .Count om matcherna är inlagda i repositoryn.
+        private BengansSystem _system;
 
         public UnitTest1()
         {
-            bengansSystem = new BengansSystem(IBR);
-            var benny = new Party()
-            {
-                Name = "Benny",
-                LegalId = "8705203984",
-                Phone = "0708160404",
-                Email = "min@mail.com"
-            };
+            _system = new BengansSystem(MemoryRepository.Instance);
 
-            var danny = new Party()
-            {
-                Name = "Danny",
-                LegalId = "9105203234",
-                Phone = "1293828311",
-                Email = "min@mail.com"
-            };
+            Seed();
+        }
 
-            var donny = new Party()
-            {
-                Name = "Donny",
-                LegalId = "9505203234",
-                Phone = "1239283901",
-                Email = "min@mail.com"
-            };
-
-            var johny = new Party()
-            {
-                Name = "Jonny",
-                LegalId = "7505203234",
-                Phone = "1239121211",
-                Email = "min@mail.com"
-            };
-
-            //repo.RegisterMember(benny);
-            //repo.RegisterMember(danny);
-            //repo.RegisterMember(donny);
-            //repo.RegisterMember(johny);
+        public void Seed()
+        {
+            _system.RegisterMember("8705203984", "Benny");
+            _system.RegisterMember("9105203234", "Danny");
+            _system.RegisterMember("9505203234", "Donny");
+            _system.RegisterMember("7505203234", "Jonny");
 
             var period = new TimePeriod
             {
                 Starttime = new DateTime(2017, 01, 01),
                 Endtime = new DateTime(2017, 12, 31)
-            };         
-
-            var match1 = new Match()
-            {
-                Id = 1,
-                PlayerOne = benny,
-                PlayerOneId = 1,
-                PlayerTwo = danny,
-                PlayerTwoId = 2,
             };
-
-            var match2 = new Match()
-            {
-                Id = 2,
-                PlayerOne = benny,
-                PlayerOneId = 1,
-                PlayerTwo = danny,
-                PlayerTwoId = 2,
-            };
-
-            var match3 = new Match()
-            {
-                Id = 3,
-                PlayerOne = benny,
-                PlayerOneId = 1,
-                PlayerTwo = danny,
-                PlayerTwoId = 2,
-            };
-
-            var match4 = new Match()
-            {
-                Id = 4,
-                PlayerOne = benny,
-                PlayerOneId = 1,
-                PlayerTwo = danny,
-                PlayerTwoId = 2,
-            };
-
-            var match5 = new Match()
-            {
-                Id = 5,
-                PlayerOne = benny,
-                PlayerOneId = 1,
-                PlayerTwo = danny,
-                PlayerTwoId = 2,
-            };
-
-            var match6 = new Match()
-            {
-                Id = 6,
-                PlayerOne = benny,
-                PlayerOneId = 1,
-                PlayerTwo = danny,
-                PlayerTwoId = 2,
-            };
-
-            //repo.RegisterMatch(match1);
-            //repo.RegisterMatch(match2);
-            //repo.RegisterMatch(match3);
-            //repo.RegisterMatch(match4);
-            //repo.RegisterMatch(match5);
-            //repo.RegisterMatch(match6);
-
-            var matchList = new List<Match>();
-            matchList.Add(match1);
-            matchList.Add(match2);
-            matchList.Add(match3);
-            matchList.Add(match4);
-            matchList.Add(match5);
-            matchList.Add(match6);
-
-            var competition = new Competition()
-            {
-                Name = "BengansTävling",
-                Period = period,
-                Matches = matchList
-            };
-
-            //repo.RegisterCompetition(competition);
         }
 
         [Fact]
@@ -171,7 +65,7 @@ namespace BengansBowlingUnitTestsLib
             rounds.Add(round2);
             rounds.Add(round3);
             var match = new Match {Id = 1, PlayerOne = benny, PlayerTwo = danny, Rounds = rounds};
-            var winner = bengansSystem.GetMatchWinner(match);
+            var winner = _system.GetMatchWinner(match);
             Assert.Equal(benny.Name, winner.Name);
             //Assert.IsType(Party, match.Winner);
         }
