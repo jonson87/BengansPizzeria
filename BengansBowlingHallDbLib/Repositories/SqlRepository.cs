@@ -25,9 +25,11 @@ namespace BengansBowlingHallDbLib
             _context.SaveChanges();
         }
 
-        public void CreateMember(Party member)
+        public void CreateMember(string legalId, string name)
         {
-            _context.Parties.Add(member);
+            var party = new Party { Name = name, LegalId = legalId };
+
+            _context.Parties.Add(party);
             _context.SaveChanges();
         }
 

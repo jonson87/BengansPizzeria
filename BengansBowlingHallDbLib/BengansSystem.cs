@@ -26,7 +26,7 @@ namespace BengansBowlingHallDbLib
                 Name = name,
                 LegalId = legalId
             };
-            _repository.CreateMember(member);
+            _repository.CreateMember(legalId, name);
         }
 
         public void RegisterMatch(Party player1, Party player2)
