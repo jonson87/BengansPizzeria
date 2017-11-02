@@ -43,8 +43,14 @@ namespace BengansBowlingHallDbLib.Repositories
             }
         }
 
-        public void CreateCompetition(Competition competition)
+        public void CreateCompetition(string name, TimePeriod period, List<Match> matches)
         {
+            var competition = new Competition()
+            {
+                Name = name,
+                Period = period,
+                Matches = matches
+            };
             Competitions.Add(competition);
         }
 

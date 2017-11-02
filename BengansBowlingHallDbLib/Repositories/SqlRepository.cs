@@ -13,8 +13,14 @@ namespace BengansBowlingHallDbLib
         {
             _context = context;
         }
-        public void CreateCompetition(Competition competition)
+        public void CreateCompetition(string name, TimePeriod period, List<Match> matches)
         {
+            var competition = new Competition()
+            {
+                Name = name,
+                Period = period,
+                Matches = matches
+            };
             _context.Competitions.Add(competition);
             _context.SaveChanges();
         }

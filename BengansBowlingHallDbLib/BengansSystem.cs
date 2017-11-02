@@ -36,14 +36,9 @@ namespace BengansBowlingHallDbLib
 
         public void RegisterCompetition(string name, TimePeriod period, List<Match> matches)
         {
-            var competition = new Competition()
-            {
-                Name = name,
-                Period = period,
-                Matches = matches
-            };
+            
 
-            _repository.CreateCompetition(competition);
+            _repository.CreateCompetition(name, period, matches);
         }
 
         //Should use the lists/dbsets in _repository

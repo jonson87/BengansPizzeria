@@ -1,4 +1,5 @@
-﻿using AccountabilityLib;
+﻿using System.Collections.Generic;
+using AccountabilityLib;
 
 namespace BengansBowlingHallDbLib.Interfaces
 {
@@ -8,6 +9,6 @@ namespace BengansBowlingHallDbLib.Interfaces
         void CreateMatch(Party player1, Party player2);
         void CreateSerie(Serie serie);
         void CreateRound(Round round);
-        void CreateCompetition(Competition competition);
+        void CreateCompetition(string name, TimePeriod period, List<Match> matches);
     }
 }
