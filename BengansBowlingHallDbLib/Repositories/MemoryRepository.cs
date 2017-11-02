@@ -1,13 +1,15 @@
 ﻿using BengansBowlingHallDbLib.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using AccountabilityLib;
 
 namespace BengansBowlingHallDbLib.Repositories
 {
-    public class MemoryRepository : IBengansRepository
+    public sealed class MemoryRepository : IBengansRepository
     {
+        private static MemoryRepository instance = null;
+        private static readonly object padlock = new object();
+
         public List<Party> Parties;
         public List<Match> Matches;
         public List<Round> Rounds;
@@ -21,6 +23,23 @@ namespace BengansBowlingHallDbLib.Repositories
             Series = new List<Serie>();
         }
 
+        public static MemoryRepository Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (padlock)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new MemoryRepository();
+                        }
+                    }
+                }
+                return instance;
+            }
+        }
 
         public void CreateCompetition(Competition competition)
         {
