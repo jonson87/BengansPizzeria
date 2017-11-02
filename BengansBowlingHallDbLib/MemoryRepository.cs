@@ -6,5 +6,6 @@ namespace BengansBowlingHallDbLib
 {
     public class MemoryRepository
     {
+
     }
 }
