@@ -52,43 +52,42 @@ namespace BengansBowlingHallDbLib
         }
 
         //Should use the lists/dbsets in _repository
-        public void PlayMatch(Match match)
+        public Match PlayMatch(Match match)
         {
-            //var rounds = new List<Round>(3);
-            //int playerOneWonRounds = 0;
+            List<Round> rounds = new List<Round>();
+            int playerOneWonRounds = 0;
 
-            //for (int i = Rounds.Count; i <= Rounds.Count + 3; i++)
-            //{
-            //    rounds.Add(new Round { Id = i });
-            //}
+            if (match.Rounds != null && match.Rounds.Count != 0)
+            {
+                rounds = match.Rounds;
+            }
 
-            //Rounds.AddRange(rounds);
+            else
+            {
+                for (int i = 1; i <= 3; i++)
+                {
+                    var round = GetRound();
+                    round.SerieOne = new Serie { Score = GetSerieScore() };
+                    round.SerieTwo = new Serie { Score = GetSerieScore() };
 
-            //foreach (var round in rounds)
-            //{
-            //    var series = new List<Serie>(2);
+                    rounds.Add(round);
+                    if (round.SerieOne.Score > round.SerieTwo.Score)
+                        playerOneWonRounds++;
+                }
+            }
 
-            //    for (int i = Series.Count + 1; i <= Series.Count + 2; i++)
-            //    {
-            //        series.Add(new Serie { Id = i, Score = i + 100 });
-            //    }
+            foreach (var round in rounds)
+            {
+                if (round.SerieOne.Score > round.SerieTwo.Score)
+                    playerOneWonRounds++;
+            }
 
-            //    round.SerieOne = series[0];
-            //    round.SerieTwo = series[1];
+            if (playerOneWonRounds > 1)
+                match.Winner = match.PlayerOne;
+            else
+                match.Winner = match.PlayerTwo;
 
-            //    if (series[0].Score > series[1].Score)
-            //    {
-            //        playerOneWonRounds++;
-            //    }
-
-            //    Series.AddRange(series);
-            //}
-
-            //match.Rounds = rounds;
-
-            //match.Winner = playerOneWonRounds > 1 ? match.PlayerOne : match.PlayerTwo;
-
-            //return match;
+            return match;
         }
 
         public void RegisterRound(int id, Serie serieOne, Serie serieTwo)
@@ -103,6 +102,18 @@ namespace BengansBowlingHallDbLib
             //var serie = new Serie {Score = score};
             //Series.Add(serie);
             //_context.SaveChanges();
+        }
+
+        public Round GetRound()
+        {
+            return new Round();
+        }
+
+        public int GetSerieScore()
+        {
+            Random random = new Random();
+            var score = random.Next(50, 300);
+            return score;
         }
     }
 }
