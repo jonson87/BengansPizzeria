@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using AccountabilityLib;
 
-namespace BengansBowlingHallDbLib
+namespace BengansBowlingHallDbLib.Data
 {
     public class BengansBowlingHallDbContext : DbContext
     {
