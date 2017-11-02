@@ -3,18 +3,20 @@ using System;
 using AccountabilityLib;
 using Xunit;
 using System.Collections.Generic;
+using BengansBowlingHallDbLib.Interfaces;
 
 namespace BengansBowlingUnitTestsLib
 {
     public class UnitTest1
     {
-        private BengansSystem repo;
+        private BengansSystem bengansSystem;
+        private IBengansRepository IBR;
 
         //TODO Bryt ut all datagenerering till testmetoder. Testmetod "CreateMatches" kan t.ex. skapa matcher och kontrollera genom .Count om matcherna är inlagda i repositoryn.
 
         public UnitTest1()
         {
-            //repo = new BengansSystem();
+            bengansSystem = new BengansSystem(IBR);
             var benny = new Party()
             {
                 Name = "Benny",
@@ -140,9 +142,37 @@ namespace BengansBowlingUnitTestsLib
         [Fact]
         public void TestWinner()
         {
-            //var match = Matches.Single(x => x.Id == matchId);
-            //var match = repo.PlayMatch(1);
-            //Assert.Equal(repo.Parties[1], match.Winner);
+            var benny = new Party()
+            {
+                Name = "Benny",
+                LegalId = "8705203984",
+                Phone = "0708160404",
+                Email = "min@mail.com"
+            };
+
+            var danny = new Party()
+            {
+                Name = "Danny",
+                LegalId = "9105203234",
+                Phone = "1293828311",
+                Email = "min@mail.com"
+            };
+            var serie1P1 = new Serie {Score = 100};
+            var serie1P2 = new Serie { Score = 200 };
+            var serie2P1 = new Serie { Score = 300 };
+            var serie2P2 = new Serie { Score = 50 };
+            var serie3P1 = new Serie { Score = 250 };
+            var serie3P2 = new Serie { Score = 100 };
+            var round1 = new Round {SerieOne = serie1P1, SerieTwo = serie1P2};
+            var round2 = new Round { SerieOne = serie2P1, SerieTwo = serie2P2 };
+            var round3 = new Round { SerieOne = serie3P1, SerieTwo = serie3P2 };
+            var rounds = new List<Round>();
+            rounds.Add(round1);
+            rounds.Add(round2);
+            rounds.Add(round3);
+            var match = new Match {Id = 1, PlayerOne = benny, PlayerTwo = danny, Rounds = rounds};
+            var winner = bengansSystem.GetMatchWinner(match);
+            Assert.Equal(benny.Name, winner.Name);
             //Assert.IsType(Party, match.Winner);
         }
 

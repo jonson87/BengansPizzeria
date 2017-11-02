@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AccountabilityLib;
 using BengansBowlingHallDbLib;
+using BengansBowlingHallDbLib.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
@@ -9,16 +10,19 @@ namespace BengansBowlingIntegrationsTestsLib
 {
     public class IntegrationTest1
     {
-        private BengansBowlingHallDbContext _context;
-        private BengansSystem repo;
+        //private BengansBowlingHallDbContext _context;
+        private BengansSystem bengansSystem;
+
+        private IBengansRepository bengansRepository;
         public IntegrationTest1()
         {
-            var optionsBuilder = new DbContextOptionsBuilder<BengansBowlingHallDbContext>();
-            optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+            bengansSystem = new BengansSystem(MemoryRepository.Instance());
+            //var optionsBuilder = new DbContextOptionsBuilder<BengansBowlingHallDbContext>();
+            //optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
             //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BengansBowlingHallDb;Integrated Security=True;" +
             //                            "Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;" +
             //                            "MultiSubnetFailover=False");
-            _context = new BengansBowlingHallDbContext(optionsBuilder.Options);
+            //_context = new BengansBowlingHallDbContext(optionsBuilder.Options);
 
             var benny = new Party()
             {

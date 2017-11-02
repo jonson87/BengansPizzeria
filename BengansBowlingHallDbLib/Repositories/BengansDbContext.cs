@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BengansBowlingHallDbLib.Repositories
 {
-    class BengansDbContext
+    public class BengansDbContext
     {
     }
 }
