@@ -51,6 +51,7 @@ namespace BengansBowlingHallDbLib
             _repository.CreateCompetition(competition);
         }
 
+        //Should use the lists/dbsets in _repository
         public void PlayMatch(Match match)
         {
             //var rounds = new List<Round>(3);
