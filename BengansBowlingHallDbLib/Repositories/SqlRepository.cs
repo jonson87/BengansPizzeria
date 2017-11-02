@@ -19,8 +19,9 @@ namespace BengansBowlingHallDbLib
             _context.SaveChanges();
         }
 
-        public void CreateMatch(Match match)
+        public void CreateMatch(Party player1, Party player2)
         {
+            var match = new Match {PlayerOne = player1, PlayerTwo = player2};
             _context.Matches.Add(match);
             _context.SaveChanges();
         }

@@ -48,8 +48,9 @@ namespace BengansBowlingHallDbLib.Repositories
             Competitions.Add(competition);
         }
 
-        public void CreateMatch(Match match)
+        public void CreateMatch(Party player1, Party player2)
         {
+            var match = new Match { PlayerOne = player1, PlayerTwo = player2 };
             Matches.Add(match);
         }
 
