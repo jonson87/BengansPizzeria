@@ -10,7 +10,7 @@ namespace BengansBowlingIntegrationsTestsLib
     public class IntegrationTest1
     {
         private BengansBowlingHallDbContext _context;
-        private BengansRepository repo;
+        private BengansSystem repo;
         public IntegrationTest1()
         {
             var optionsBuilder = new DbContextOptionsBuilder<BengansBowlingHallDbContext>();
@@ -56,7 +56,7 @@ namespace BengansBowlingIntegrationsTestsLib
                 Email = "min@mail.com"
             };
 
-            repo = new BengansRepository(_context);
+            repo = new BengansSystem(_context);
             repo.RegisterMember(benny);
             repo.RegisterMember(danny);
             repo.RegisterMember(donny);

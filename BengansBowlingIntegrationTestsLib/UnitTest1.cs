@@ -8,13 +8,13 @@ namespace BengansBowlingUnitTestsLib
 {
     public class UnitTest1
     {
-        private BengansRepository repo;
+        private BengansSystem repo;
 
         //TODO Bryt ut all datagenerering till testmetoder. Testmetod "CreateMatches" kan t.ex. skapa matcher och kontrollera genom .Count om matcherna är inlagda i repositoryn.
 
         public UnitTest1()
         {
-            repo = new BengansRepository();
+            repo = new BengansSystem();
             var benny = new Party()
             {
                 Name = "Benny",
