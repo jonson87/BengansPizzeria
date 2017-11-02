@@ -2,108 +2,88 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AccountabilityInterfacesLib;
 using AccountabilityLib;
 
 namespace BengansBowlingHallDbLib
 {
     public class BengansSystem
     {
-        //TODO Byt namn till t.ex. Bengans System. Systemet ska sedan i sin tur prata med repositories som i sin tur pratar med listor respektive context.
         //TODO Byt ut kontruktörparametrarna så att den tar in repositories för varje enhet. T.ex. PartiesRepository och MatchesRepository
-
-        private BengansBowlingHallDbContext _context;
-        public List<Party> Parties;
-        public List<Match> Matches;
-        public List<Round> Rounds;
-        public List<Serie> Series;
+        //TODO Fixa samtliga metoder nedan.
 
         public BengansSystem()
         {
 
         }
 
-        public BengansSystem(BengansBowlingHallDbContext context)
-        {
-            _context = context;
-            Parties = new List<Party>();
-            Matches = new List<Match>();
-            Rounds = new List<Round>();
-            Series = new List<Serie>();
-        }
-
         public void RegisterMember(Party member)
         {
             //Parties.Add(party);
-            _context.Parties.Add(member);
-            _context.SaveChanges();
         }
 
         public void RegisterMatch(Match match)
         {
             //Matches.Add(match);
-            _context.Matches.Add(match);
-            _context.SaveChanges();
         }
 
         public void RegisterSerie(int id, int score)
         {
-            var serie = new Serie {Score = score};
-            Series.Add(serie);
+            //var serie = new Serie {Score = score};
+            //Series.Add(serie);
             //_context.SaveChanges();
         }
 
         public void RegisterRound(int id,Serie serieOne, Serie serieTwo)
         {
-            var round = new Round {SerieOne = serieOne, SerieTwo = serieTwo};
-            Rounds.Add(round);
+            //var round = new Round {SerieOne = serieOne, SerieTwo = serieTwo};
+            //Rounds.Add(round);
             //_context.SaveChanges();
         }
 
         public void RegisterCompetition(Competition competition)
         {
-            _context.Competitions.Add(competition);
-            _context.SaveChanges();
+            //_context.Competitions.Add(competition);
+            //_context.SaveChanges();
         }
 
-        public Match PlayMatch(int matchId)
+        public void PlayMatch(int matchId)
         {
-            var match = Matches.Single(x => x.Id == matchId);
-            var rounds = new List<Round>(3);
-            int playerOneWonRounds = 0;
+            //var match = Matches.Single(x => x.Id == matchId);
+            //var rounds = new List<Round>(3);
+            //int playerOneWonRounds = 0;
 
-            for (int i = Rounds.Count; i <= Rounds.Count + 3; i++)
-            {
-                rounds.Add(new Round { Id = i });
-            }
+            //for (int i = Rounds.Count; i <= Rounds.Count + 3; i++)
+            //{
+            //    rounds.Add(new Round { Id = i });
+            //}
 
-            Rounds.AddRange(rounds);   
+            //Rounds.AddRange(rounds);   
 
-            foreach (var round in rounds)
-            {
-                var series = new List<Serie>(2);
+            //foreach (var round in rounds)
+            //{
+            //    var series = new List<Serie>(2);
 
-                for (int i = Series.Count + 1; i <= Series.Count + 2; i++)
-                {
-                    series.Add(new Serie { Id = i, Score = i+100 });
-                }
+            //    for (int i = Series.Count + 1; i <= Series.Count + 2; i++)
+            //    {
+            //        series.Add(new Serie { Id = i, Score = i+100 });
+            //    }
 
-                round.SerieOne = series[0];
-                round.SerieTwo = series[1];
+            //    round.SerieOne = series[0];
+            //    round.SerieTwo = series[1];
 
-                if (series[0].Score > series[1].Score)
-                {
-                    playerOneWonRounds++;
-                }
+            //    if (series[0].Score > series[1].Score)
+            //    {
+            //        playerOneWonRounds++;
+            //    }
 
-                Series.AddRange(series);
-            }
+            //    Series.AddRange(series);
+            //}
 
-            match.Rounds = rounds;
+            //match.Rounds = rounds;
 
-            match.Winner = playerOneWonRounds > 1 ? match.PlayerOne : match.PlayerTwo;
+            //match.Winner = playerOneWonRounds > 1 ? match.PlayerOne : match.PlayerTwo;
 
-            return match;
+            //return match;
         }
     }
 }

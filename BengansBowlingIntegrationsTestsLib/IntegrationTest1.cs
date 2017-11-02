@@ -56,11 +56,11 @@ namespace BengansBowlingIntegrationsTestsLib
                 Email = "min@mail.com"
             };
 
-            repo = new BengansSystem(_context);
-            repo.RegisterMember(benny);
-            repo.RegisterMember(danny);
-            repo.RegisterMember(donny);
-            repo.RegisterMember(johny);
+            //repo = new BengansSystem(_context);
+            //repo.RegisterMember(benny);
+            //repo.RegisterMember(danny);
+            //repo.RegisterMember(donny);
+            //repo.RegisterMember(johny);
 
             var period = new TimePeriod
             {
