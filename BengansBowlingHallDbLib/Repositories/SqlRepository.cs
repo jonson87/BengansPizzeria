@@ -32,12 +32,12 @@ namespace BengansBowlingHallDbLib
             return _context.Parties.ToList();
         }
 
-        public void CreateMatch(Party player1, Party player2)
-        {
-            var match = new Match {PlayerOne = player1, PlayerTwo = player2};
-            _context.Matches.Add(match);
-            _context.SaveChanges();
-        }
+        //public void CreateMatch(Party player1, Party player2)
+        //{
+        //    var match = new Match {PlayerOne = player1, PlayerTwo = player2};
+        //    _context.Matches.Add(match);
+        //    _context.SaveChanges();
+        //}
 
         public void CreateMember(string legalId, string name)
         {
@@ -56,6 +56,10 @@ namespace BengansBowlingHallDbLib
         {
             throw new NotImplementedException();
         }
-        
+
+        public void CreateMatch(Party player1, Party player2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

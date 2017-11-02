@@ -80,18 +80,19 @@ namespace BengansBowlingHallDbLib
         public Party GetMatchWinner(Match match)
         {
             int playerOneWonRounds = 0;
+
             foreach (var round in match.Rounds)
             {
-                if (round.SerieOne.Score > round.SerieTwo.Score)
+                if (round.PlayerOneSerie.Score > round.PlayerTwoSerie.Score)
                     playerOneWonRounds++;
             }
 
             if (playerOneWonRounds > 1)
             {
-                return match.PlayerOne;
+                return match.Rounds[0].PlayerOneSerie.Player;
             }
 
-            return match.PlayerTwo;
+            return match.Rounds[0].PlayerTwoSerie.Player;
         }
 
         public int GetSerieScore()
