@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using AccountabilityLib;
 using BengansBowlingHallDbLib.Interfaces;
@@ -26,6 +27,11 @@ namespace BengansBowlingHallDbLib
             _context.SaveChanges();
         }
 
+        public List<Party> GetPlayers()
+        {
+            return _context.Parties.ToList();
+        }
+
         public void CreateMatch(Party player1, Party player2)
         {
             var match = new Match {PlayerOne = player1, PlayerTwo = player2};
@@ -50,5 +56,6 @@ namespace BengansBowlingHallDbLib
         {
             throw new NotImplementedException();
         }
+        
     }
 }

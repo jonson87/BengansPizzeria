@@ -74,5 +74,10 @@ namespace BengansBowlingHallDbLib.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public List<Party> GetPlayers()
+        {
+            return Parties;
+        }
     }
 }

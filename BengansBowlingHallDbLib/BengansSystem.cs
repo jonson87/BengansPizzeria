@@ -21,11 +21,6 @@ namespace BengansBowlingHallDbLib
 
         public void RegisterMember(string legalId, string name)
         {
-            var member = new Party()
-            {
-                Name = name,
-                LegalId = legalId
-            };
             _repository.CreateMember(legalId, name);
         }
 
@@ -36,8 +31,6 @@ namespace BengansBowlingHallDbLib
 
         public void RegisterCompetition(string name, TimePeriod period, List<Match> matches)
         {
-            
-
             _repository.CreateCompetition(name, period, matches);
         }
 
