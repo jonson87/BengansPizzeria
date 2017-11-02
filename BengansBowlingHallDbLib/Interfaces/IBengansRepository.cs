@@ -7,8 +7,8 @@ namespace BengansBowlingHallDbLib.Interfaces
     {
         void CreateMember(string legalId, string name);
         void CreateMatch(Party player1, Party player2);
-        void CreateSerie(Serie serie);
-        void CreateRound(Round round);
+        Serie CreateSerie(int score);
+        Round CreateRound(Serie serieOne, Serie serieTwo);
         void CreateCompetition(string name, TimePeriod period, List<Match> matches);
         List<Party> GetPlayers();
     }
