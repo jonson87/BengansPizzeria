@@ -15,17 +15,20 @@ namespace BengansBowlingHallDbLib
         }
         public void CreateCompetition(Competition competition)
         {
-            throw new NotImplementedException();
+            _context.Competitions.Add(competition);
+            _context.SaveChanges();
         }
 
         public void CreateMatch(Match match)
         {
-            throw new NotImplementedException();
+            _context.Matches.Add(match);
+            _context.SaveChanges();
         }
 
         public void CreateMember(Party member)
         {
-            throw new NotImplementedException();
+            _context.Parties.Add(member);
+            _context.SaveChanges();
         }
 
         public void CreateRound(Round round)
