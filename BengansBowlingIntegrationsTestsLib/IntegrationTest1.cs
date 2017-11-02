@@ -37,15 +37,13 @@ namespace BengansBowlingIntegrationsTestsLib
             sut.RegisterMember("87123523122", "Jonny");
             sut.RegisterMember("87052012312", "Donny");
             sut.RegisterMember("87063234112", "Fanny");
-            repo.GetPlayers();
-            //sut.RegisterMatch()
         }
 
         [Fact]
         public void GenerateMembers()
         {
-            //var parties = _context.Parties.ToListAsync().Result;
-            //Assert.Equal(4, parties.Count);
+            var parties = _context.Parties.ToListAsync().Result;
+            Assert.Equal(5, parties.Count);
         }
 
         [Fact]
