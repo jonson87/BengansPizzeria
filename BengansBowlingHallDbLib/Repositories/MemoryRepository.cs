@@ -53,9 +53,10 @@ namespace BengansBowlingHallDbLib.Repositories
             Matches.Add(match);
         }
 
-        public void CreateMember(Party member)
+        public void CreateMember(string legalId, string name)
         {
-            Parties.Add(member);
+            var party = new Party {Name = name, LegalId = legalId};
+            Parties.Add(party);
         }
 
         public void CreateRound(Round round)
