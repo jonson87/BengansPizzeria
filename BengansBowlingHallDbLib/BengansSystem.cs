@@ -31,12 +31,7 @@ namespace BengansBowlingHallDbLib
 
         public void RegisterMatch(Party player1, Party player2)
         {
-            var match = new Match()
-            {
-                PlayerOne = player1,
-                PlayerTwo = player2
-            };
-            _repository.CreateMatch(match);
+           _repository.CreateMatch(player1, player2);
         }     
 
         public void RegisterCompetition(string name, TimePeriod period, List<Match> matches)
