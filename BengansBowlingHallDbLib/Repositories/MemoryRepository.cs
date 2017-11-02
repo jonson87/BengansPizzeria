@@ -14,6 +14,7 @@ namespace BengansBowlingHallDbLib.Repositories
         public List<Match> Matches;
         public List<Round> Rounds;
         public List<Serie> Series;
+        public List<Competition> Competitions { get; set; }
 
         public MemoryRepository()
         {
@@ -21,6 +22,7 @@ namespace BengansBowlingHallDbLib.Repositories
             Matches = new List<Match>();
             Rounds = new List<Round>();
             Series = new List<Serie>();
+            Competitions = new List<Competition>();
         }
 
         public static MemoryRepository Instance
@@ -43,22 +45,21 @@ namespace BengansBowlingHallDbLib.Repositories
 
         public void CreateCompetition(Competition competition)
         {
-            throw new NotImplementedException();
+            Competitions.Add(competition);
         }
 
         public void CreateMatch(Match match)
         {
-            throw new NotImplementedException();
+            Matches.Add(match);
         }
 
         public void CreateMember(Party member)
         {
-            throw new NotImplementedException();
+            Parties.Add(member);
         }
 
         public void CreateRound(Round round)
         {
-            throw new NotImplementedException();
         }
 
         public void CreateSerie(Serie serie)

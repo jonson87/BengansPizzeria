@@ -14,7 +14,7 @@ namespace BengansBowlingUnitTestsLib
 
         public UnitTest1()
         {
-            repo = new BengansSystem();
+            //repo = new BengansSystem();
             var benny = new Party()
             {
                 Name = "Benny",
@@ -47,10 +47,10 @@ namespace BengansBowlingUnitTestsLib
                 Email = "min@mail.com"
             };
 
-            repo.RegisterMember(benny);
-            repo.RegisterMember(danny);
-            repo.RegisterMember(donny);
-            repo.RegisterMember(johny);
+            //repo.RegisterMember(benny);
+            //repo.RegisterMember(danny);
+            //repo.RegisterMember(donny);
+            //repo.RegisterMember(johny);
 
             var period = new TimePeriod
             {
@@ -112,12 +112,12 @@ namespace BengansBowlingUnitTestsLib
                 PlayerTwoId = 2,
             };
 
-            repo.RegisterMatch(match1);
-            repo.RegisterMatch(match2);
-            repo.RegisterMatch(match3);
-            repo.RegisterMatch(match4);
-            repo.RegisterMatch(match5);
-            repo.RegisterMatch(match6);
+            //repo.RegisterMatch(match1);
+            //repo.RegisterMatch(match2);
+            //repo.RegisterMatch(match3);
+            //repo.RegisterMatch(match4);
+            //repo.RegisterMatch(match5);
+            //repo.RegisterMatch(match6);
 
             var matchList = new List<Match>();
             matchList.Add(match1);
@@ -134,12 +134,13 @@ namespace BengansBowlingUnitTestsLib
                 Matches = matchList
             };
 
-            repo.RegisterCompetition(competition);
+            //repo.RegisterCompetition(competition);
         }
 
         [Fact]
         public void TestWinner()
         {
+            //var match = Matches.Single(x => x.Id == matchId);
             //var match = repo.PlayMatch(1);
             //Assert.Equal(repo.Parties[1], match.Winner);
             //Assert.IsType(Party, match.Winner);

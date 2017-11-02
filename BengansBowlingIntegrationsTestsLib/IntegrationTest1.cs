@@ -123,12 +123,12 @@ namespace BengansBowlingIntegrationsTestsLib
                 PlayerTwoId = 2,
             };
 
-            repo.RegisterMatch(match1);
-            repo.RegisterMatch(match2);
-            repo.RegisterMatch(match3);
-            repo.RegisterMatch(match4);
-            repo.RegisterMatch(match5);
-            repo.RegisterMatch(match6);
+            //repo.RegisterMatch(match1);
+            //repo.RegisterMatch(match2);
+            //repo.RegisterMatch(match3);
+            //repo.RegisterMatch(match4);
+            //repo.RegisterMatch(match5);
+            //repo.RegisterMatch(match6);
 
             var matchList = new List<Match>();
             matchList.Add(match1);
@@ -145,7 +145,7 @@ namespace BengansBowlingIntegrationsTestsLib
                 Matches = matchList
             };
 
-            repo.RegisterCompetition(competition);
+            //repo.RegisterCompetition(competition);
         }
 
         [Fact]
