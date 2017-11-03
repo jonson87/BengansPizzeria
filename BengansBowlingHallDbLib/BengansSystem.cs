@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AccountabilityLib;
 using BengansBowlingHallDbLib.Interfaces;
 
@@ -7,9 +6,6 @@ namespace BengansBowlingHallDbLib
 {
     public class BengansSystem
     {
-        //TODO Byt ut kontruktörparametrarna så att den tar in repositories för varje enhet. T.ex. PartiesRepository och MatchesRepository
-        //TODO Fixa samtliga metoder nedan.
-
         private IBengansRepository _repository; 
 
         public BengansSystem(IBengansRepository repository)
