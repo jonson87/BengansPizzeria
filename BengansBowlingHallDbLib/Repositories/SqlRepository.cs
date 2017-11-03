@@ -34,7 +34,7 @@ namespace BengansBowlingHallDbLib
 
             _context.Parties.Add(party);
             _context.SaveChanges();
-            return party.PartyId;
+            return party.Id;
         }
 
         public int CreateRound(Serie serieOne, Serie serieTwo)
