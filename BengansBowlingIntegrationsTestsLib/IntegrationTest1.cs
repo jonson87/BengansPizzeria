@@ -30,11 +30,11 @@ namespace BengansBowlingIntegrationsTestsLib
 
         public void Seed()
         {
-            sut.RegisterMember("87052060389", "Benny");
-            sut.RegisterMember("87052234324", "Danny");
-            sut.RegisterMember("87123523122", "Jonny");
-            sut.RegisterMember("87052012312", "Donny");
-            sut.RegisterMember("87063234112", "Fanny");
+            sut.CreateMember("87052060389", "Benny");
+            sut.CreateMember("87052234324", "Danny");
+            sut.CreateMember("87123523122", "Jonny");
+            sut.CreateMember("87052012312", "Donny");
+            sut.CreateMember("87063234112", "Fanny");
         }
 
         [Fact]
@@ -47,8 +47,8 @@ namespace BengansBowlingIntegrationsTestsLib
         [Fact]
         public void GetCompetitionInformation()
         {
-            sut.RegisterSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Benny").Result, 50);
-            sut.RegisterSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Danny").Result, 70);
+            sut.CreateSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Benny").Result, 50);
+            sut.CreateSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Danny").Result, 70);
             //sut.RegisterRound()
             //sut.RegisterSerie
             //var time = new TimePeriod {Endtime = new DateTime(2017, 11, 01), Starttime = new DateTime(2017, 12, 01)};

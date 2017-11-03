@@ -19,10 +19,10 @@ namespace BengansBowlingUnitTestsLib
 
         public void Seed()
         {
-            _system.RegisterMember("8705203984", "Benny");
-            _system.RegisterMember("9105203234", "Danny");
-            _system.RegisterMember("9505203234", "Donny");
-            _system.RegisterMember("7505203234", "Jonny");
+            _system.CreateMember("8705203984", "Benny");
+            _system.CreateMember("9105203234", "Danny");
+            _system.CreateMember("9505203234", "Donny");
+            _system.CreateMember("7505203234", "Jonny");
 
             var period = new TimePeriod
             {
