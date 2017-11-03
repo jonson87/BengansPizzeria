@@ -70,12 +70,14 @@ namespace BengansBowlingHallDbLib.Repositories
         }
 
         //Match management
-        public int CreateMatch(List<Round> rounds)
+        public int CreateMatch(List<Round> rounds, Party winner = null)
         {
             var match = new Match()
             {
                 Id = Matches.Count + 1,
-                Rounds = rounds
+                Rounds = rounds,
+                Winner = winner,
+                WinnerId = winner.Id
             };
 
             Matches.Add(match);

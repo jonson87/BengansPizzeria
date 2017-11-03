@@ -30,9 +30,9 @@ namespace BengansBowlingHallDbLib
             return _repository.GetParty(id);
         }
 
-        public int CreateMatch(List<Round> rounds)
+        public int CreateMatch(List<Round> rounds, Party winner = null)
         {
-            return _repository.CreateMatch(rounds);
+            return _repository.CreateMatch(rounds, winner);
         }
 
         public List<Match> GetAllMatches()
@@ -146,28 +146,22 @@ namespace BengansBowlingHallDbLib
                         Player = allPlayers.Single(p => p.Id == g.Key.WinnerId)
                     });
 
-            var age = 46;
-
-            //foreach (var match in competition.Matches)
+            //foreach (var competition in competitionsThisYear)
             //{
-            //    playerList.ForEach(p => { p.Player.Id == match.WinnerId ? p.MatchesWon++ : p.MatchesWon; });
+            //    var playerWins = competition.Matches
+            //        .GroupBy(match => match.WinnerId)
+            //        .Select(g => new
+            //        {
+            //            PlayerId = g.Key,
+            //            Wins = g.Count(),
+            //            Played = competition.Matches.SelectMany(m => m.Rounds).Take(1)
+            //            .Select(r => r.PlayerOneSerie.PlayerId == g.Key || r.PlayerTwoSerie.PlayerId == g.Key)
+            //            .Count(),
+            //            Player = allPlayers.Single(p => p.Id == g.Key)
+            //        });
             //}
 
-            //foreach (var rounds in competition.Matches.Select(x => x.Rounds))
-            //{
-            //    var playerStatistics = new PlayerStatistics();
-            //    if (rounds.Select(x => x.PlayerOneSerie.Player.Id) == rounds.Select(x => x.Match.Winner.Id))
-            //    {
-            //        playerStatistics.MatchesWon += 1;
-            //        playerStatistics.Matchesplayed += 1;
-            //    }
-            //    else if (rounds.Select(x => x.PlayerTwoSerie.Player.Id) == rounds.Select(x => x.Match.Winner.Id))
-            //    {
-
-            //    }
-            //}    
-
-            return playerWins.OrderByDescending(w => w.Wins).First().Player;
+            return playerWins.OrderByDescending(p => p.Wins/p.Played).First().Player;
         }
-}
+    }
 }

@@ -53,9 +53,9 @@ namespace BengansBowlingHallDbLib
             return serie.Id;
         }
 
-        public int CreateMatch(List<Round> rounds)
+        public int CreateMatch(List<Round> rounds, Party winner = null)
         {
-            var match = new Match { Rounds = rounds};
+            var match = new Match { Rounds = rounds, Winner = winner, WinnerId = winner.Id};
             _context.Matches.Add(match);
             _context.SaveChanges();
             return match.Id;
