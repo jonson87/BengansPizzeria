@@ -43,7 +43,7 @@ namespace BengansBowlingHallDbLib.Repositories
             }
         }
 
-        public void CreateCompetition(string name, TimePeriod period, List<Match> matches)
+        public int CreateCompetition(string name, TimePeriod period, List<Match> matches)
         {
             var competition = new Competition()
             {
@@ -52,6 +52,7 @@ namespace BengansBowlingHallDbLib.Repositories
                 Matches = matches
             };
             Competitions.Add(competition);
+            return competition.Id;
         }
 
         //public void CreateMatch(Party player1, Party player2)
@@ -60,18 +61,19 @@ namespace BengansBowlingHallDbLib.Repositories
         //    Matches.Add(match);
         //}
 
-        public void CreateMember(string legalId, string name)
+        public int CreateMember(string legalId, string name)
         {
             var party = new Party {Name = name, LegalId = legalId};
             Parties.Add(party);
+            return party.PartyId;
         }
 
-        public Round CreateRound(Serie serieOne, Serie serieTwo)
+        public int CreateRound(Serie serieOne, Serie serieTwo)
         {
             throw new NotImplementedException();
         }
 
-        public Serie CreateSerie(int score)
+        public int CreateSerie(int score)
         {
             throw new NotImplementedException();
         }
@@ -81,7 +83,7 @@ namespace BengansBowlingHallDbLib.Repositories
             return Parties;
         }
 
-        public void CreateMatch(Party player1, Party player2)
+        public int CreateMatch(Party player1, Party player2)
         {
             throw new NotImplementedException();
         }
@@ -111,12 +113,32 @@ namespace BengansBowlingHallDbLib.Repositories
             throw new NotImplementedException();
         }
 
-        public Serie CreateSerie(int score, Party player)
+        public int CreateSerie(int score, Party player)
         {
             throw new NotImplementedException();
         }
 
-        public void CreateRound(Round round)
+        public Party GetParty(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Match GetMatch(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Serie GetSerie(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Round GetRound(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Competition GetCompetition(int id)
         {
             throw new NotImplementedException();
         }

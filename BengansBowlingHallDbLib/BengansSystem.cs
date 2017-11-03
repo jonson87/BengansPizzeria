@@ -34,9 +34,7 @@ namespace BengansBowlingHallDbLib
        
         public void RegisterRound(int id, Serie serieOne, Serie serieTwo)
         {
-            //var round = new Round {SerieOne = serieOne, SerieTwo = serieTwo};
-            //Rounds.Add(round);
-            //_context.SaveChanges();
+            _repository.CreateRound(serieOne, serieTwo);
         }
 
         public void RegisterSerie(Party player, int score = 0)

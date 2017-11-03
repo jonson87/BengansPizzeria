@@ -5,19 +5,24 @@ namespace BengansBowlingHallDbLib.Interfaces
 {
     public interface IBengansRepository
     {
-        void CreateMember(string legalId, string name);
+        int CreateMember(string legalId, string name);
+        Party GetParty(int id);
         List<Party> GetAllParties();
 
-        void CreateMatch(Party player1, Party player2);
+        int CreateMatch(Party player1, Party player2);
+        Match GetMatch(int id);
         List<Match> GetAllMatches();
 
-        Serie CreateSerie(int score, Party player);
+        int CreateSerie(int score, Party player);
+        Serie GetSerie(int id);
         List<Serie> GetAllSeries();
 
-        void CreateRound(Round round);
+        int CreateRound(Serie serieOne, Serie serieTwo);
+        Round GetRound(int id);
         List<Round> GetAllRounds();
 
-        void CreateCompetition(string name, TimePeriod period, List<Match> matches);
+        int CreateCompetition(string name, TimePeriod period, List<Match> matches);
+        Competition GetCompetition(int id);
         List<Competition> GetAllCompetitions();
     }
 }

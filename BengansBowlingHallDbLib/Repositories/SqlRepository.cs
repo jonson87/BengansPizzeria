@@ -15,7 +15,7 @@ namespace BengansBowlingHallDbLib
         {
             _context = context;
         }
-        public void CreateCompetition(string name, TimePeriod period, List<Match> matches)
+        public int CreateCompetition(string name, TimePeriod period, List<Match> matches)
         {
             var competition = new Competition()
             {
@@ -25,6 +25,7 @@ namespace BengansBowlingHallDbLib
             };
             _context.Competitions.Add(competition);
             _context.SaveChanges();
+            return competition.Id;
         }
 
         public List<Party> GetPlayers()
@@ -39,28 +40,32 @@ namespace BengansBowlingHallDbLib
         //    _context.SaveChanges();
         //}
 
-        public void CreateMember(string legalId, string name)
+        public int CreateMember(string legalId, string name)
         {
             var party = new Party { Name = name, LegalId = legalId };
 
             _context.Parties.Add(party);
             _context.SaveChanges();
+            return party.PartyId;
         }
 
-        public Round CreateRound(Serie serieOne, Serie serieTwo)
+        public int CreateRound(Serie serieOne, Serie serieTwo)
         {
-            throw new NotImplementedException();
+            var round = new Round {PlayerOneSerie = serieOne, PlayerTwoSerie = serieTwo};
+            _context.Rounds.Add(round);
+            _context.SaveChanges();
+            return round.Id;
         }
 
-        public Serie CreateSerie(int score, Party player)
+        public int CreateSerie(int score, Party player)
         {
             var serie = new Serie {Player = player, Score = score};
             _context.Series.Add(serie);
             _context.SaveChanges();
-            return serie;
+            return serie.Id;
         }
 
-        public void CreateMatch(Party player1, Party player2)
+        public int CreateMatch(Party player1, Party player2)
         {
             throw new NotImplementedException();
         }
@@ -90,7 +95,27 @@ namespace BengansBowlingHallDbLib
             throw new NotImplementedException();
         }
 
-        public void CreateRound(Round round)
+        public Party GetParty(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Match GetMatch(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Serie GetSerie(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Round GetRound(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Competition GetCompetition(int id)
         {
             throw new NotImplementedException();
         }

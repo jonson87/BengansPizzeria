@@ -48,8 +48,8 @@ namespace BengansBowlingIntegrationsTestsLib
         public void GetCompetitionInformation()
         {
             sut.RegisterSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Benny").Result, 50);
-            sut.RegisterSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Danny").Result, 50);
-            //var matches = new List<Match>();
+            sut.RegisterSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Danny").Result, 70);
+            //sut.RegisterRound()
             //sut.RegisterSerie
             //var time = new TimePeriod {Endtime = new DateTime(2017, 11, 01), Starttime = new DateTime(2017, 12, 01)};
             //var comp = sut.RegisterCompetition("Bengans tävling",time, )
