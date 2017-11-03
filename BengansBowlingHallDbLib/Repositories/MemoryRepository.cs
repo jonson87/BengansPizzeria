@@ -78,6 +78,7 @@ namespace BengansBowlingHallDbLib.Repositories
             return Matches;
         }
 
+        public int CreateMatch(List<Round> rounds)
         public Match GetMatch(int id)
         {
             throw new NotImplementedException();

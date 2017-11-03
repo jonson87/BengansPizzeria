@@ -47,12 +47,26 @@ namespace BengansBowlingIntegrationsTestsLib
         [Fact]
         public void GetCompetitionInformation()
         {
-            sut.CreateSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Benny").Result, 50);
-            sut.CreateSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Danny").Result, 70);
-            //sut.RegisterRound()
-            //sut.RegisterSerie
-            //var time = new TimePeriod {Endtime = new DateTime(2017, 11, 01), Starttime = new DateTime(2017, 12, 01)};
-            //var comp = sut.RegisterCompetition("Bengans tävling",time, )
+            var serie1Id = sut.CreateSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Benny").Result, 50);
+            var serie2Id = sut.CreateSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Danny").Result, 70);
+            var serie1 = repo.GetSerie(serie1Id);
+            var serie2 = repo.GetSerie(serie2Id);
+            var round1Id = sut.CreateRound(serie1, serie2);
+            var round1 = repo.GetRound(round1Id);
+            var roundList = new List<Round>();
+            roundList.Add(round1);
+            var matchId = sut.CreateMatch(roundList);
+            var match = repo.GetMatch(matchId);
+            var timeperiod = new TimePeriod
+            {
+                Starttime = new DateTime(2017, 11, 01),
+                Endtime = new DateTime(2017, 11, 25)
+            };
+            var matchList = new List<Match>();
+            matchList.Add(match);
+            var compId = sut.CreateCompetition("Bengans Tävling", timeperiod, matchList);
+            var comp = _context.Competitions.FirstOrDefaultAsync(x => x.Id == compId).Result;
+            Assert.Equal("Bengans Tävling", comp.Name);
         }
     }
 }

@@ -29,11 +29,10 @@ namespace BengansBowlingHallDbLib
             return _repository.GetParty(id);
         }
 
-        //Match management
-        public int CreateMatch(Party player1, Party player2)
+        public int CreateMatch(List<Round> rounds)
         {
-           return _repository.CreateMatch(player1, player2);
-        }
+           return _repository.CreateMatch(rounds);
+        }     
 
         public List<Match> GetAllMatches()
         {

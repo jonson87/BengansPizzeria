@@ -28,18 +28,6 @@ namespace BengansBowlingHallDbLib
             return competition.Id;
         }
 
-        public List<Party> GetPlayers()
-        {
-            return _context.Parties.ToList();
-        }
-
-        //public void CreateMatch(Party player1, Party player2)
-        //{
-        //    var match = new Match {PlayerOne = player1, PlayerTwo = player2};
-        //    _context.Matches.Add(match);
-        //    _context.SaveChanges();
-        //}
-
         public int CreateMember(string legalId, string name)
         {
             var party = new Party { Name = name, LegalId = legalId };
@@ -65,59 +53,67 @@ namespace BengansBowlingHallDbLib
             return serie.Id;
         }
 
-        public int CreateMatch(Party player1, Party player2)
+        public int CreateMatch(List<Round> rounds)
         {
-            throw new NotImplementedException();
+            var match = new Match { Rounds = rounds};
+            _context.Matches.Add(match);
+            _context.SaveChanges();
+            return match.Id;
         }
 
         public List<Party> GetAllParties()
         {
-            throw new NotImplementedException();
+            return _context.Parties.ToList();
         }
 
         public List<Match> GetAllMatches()
         {
-            throw new NotImplementedException();
+            return _context.Matches.ToList();
         }
 
         public List<Serie> GetAllSeries()
         {
-            throw new NotImplementedException();
+            return _context.Series.ToList();
         }
 
         public List<Round> GetAllRounds()
         {
-            throw new NotImplementedException();
+            return _context.Rounds.ToList();
         }
 
         public List<Competition> GetAllCompetitions()
         {
-            throw new NotImplementedException();
+            return _context.Competitions.ToList();
         }
 
         public Party GetParty(int id)
         {
-            throw new NotImplementedException();
+            var party = _context.Parties.FirstOrDefault(x => x.PartyId == id);
+            return party;
         }
 
         public Match GetMatch(int id)
         {
-            throw new NotImplementedException();
+            var match = _context.Matches.FirstOrDefault(x => x.Id == id);
+            return match;
         }
 
         public Serie GetSerie(int id)
         {
-            throw new NotImplementedException();
+            var serie = _context.Series.FirstOrDefault(x => x.Id == id);
+            return serie;
         }
 
         public Round GetRound(int id)
         {
-            throw new NotImplementedException();
+            var round = _context.Rounds.FirstOrDefault(x => x.Id == id);
+            return round;
         }
 
         public Competition GetCompetition(int id)
         {
-            throw new NotImplementedException();
+            var comp = _context.Competitions.FirstOrDefault(x => x.Id == id);
+            return comp;
         }
 
         public int CreateSerie(Party player, int score = 0)
