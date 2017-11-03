@@ -36,21 +36,6 @@ namespace BengansBowlingUnitTestsLib
         [Fact]
         public void TestWinner()
         {
-            //var benny = new Party()
-            //{
-            //    Name = "Benny",
-            //    LegalId = "8705203984",
-            //    Phone = "0708160404",
-            //    Email = "min@mail.com"
-            //};
-
-            //var danny = new Party()
-            //{
-            //    Name = "Danny",
-            //    LegalId = "9105203234",
-            //    Phone = "1293828311",
-            //    Email = "min@mail.com"
-            //};
             //var serie1P1 = new Serie {Score = 100};
             //var serie1P2 = new Serie { Score = 200 };
             //var serie2P1 = new Serie { Score = 300 };

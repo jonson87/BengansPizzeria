@@ -63,5 +63,30 @@ namespace BengansBowlingHallDbLib
             throw new NotImplementedException();
 
         }
+
+        public List<Party> GetAllParties()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Match> GetAllMatches()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Serie> GetAllSeries()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Round> GetAllRounds()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Competition> GetAllCompetitions()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
