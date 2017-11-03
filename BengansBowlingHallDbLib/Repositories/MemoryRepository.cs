@@ -111,7 +111,7 @@ namespace BengansBowlingHallDbLib.Repositories
             throw new NotImplementedException();
         }
 
-        public void CreateSerie(Serie serie)
+        public Serie CreateSerie(int score, Party player)
         {
             throw new NotImplementedException();
         }
