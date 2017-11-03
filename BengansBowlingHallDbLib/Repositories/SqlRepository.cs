@@ -86,5 +86,15 @@ namespace BengansBowlingHallDbLib
         {
             throw new NotImplementedException();
         }
+
+        public void CreateSerie(Serie serie)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateRound(Round round)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
