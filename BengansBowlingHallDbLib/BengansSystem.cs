@@ -7,7 +7,7 @@ namespace BengansBowlingHallDbLib
 {
     public class BengansSystem
     {
-        private IBengansRepository _repository; 
+        private IBengansRepository _repository;
 
         public BengansSystem(IBengansRepository repository)
         {
@@ -32,8 +32,8 @@ namespace BengansBowlingHallDbLib
 
         public int CreateMatch(List<Round> rounds)
         {
-           return _repository.CreateMatch(rounds);
-        }     
+            return _repository.CreateMatch(rounds);
+        }
 
         public List<Match> GetAllMatches()
         {
@@ -118,23 +118,56 @@ namespace BengansBowlingHallDbLib
         public Party GetWinnerOfTheYear(int year)
         {
             var playerList = new List<PlayerStatistics>();
-            var competitionsThisYear = _repository.GetAllCompetitions().Where(x=>x.Period.Starttime.Year == year && x.Period.Endtime.Year == year);
-            foreach (var competition in competitionsThisYear)
+            var allPlayers = new List<Party>();
+            allPlayers = _repository.GetAllParties();
+
+            //Move all players to the statistics list
+            foreach (var player in allPlayers)
             {
-                foreach (var rounds in competition.Matches.Select(x=>x.Rounds))
+                var playerStatistics = new PlayerStatistics()
                 {
-                    var playerStatistics = new PlayerStatistics();
-                    if (rounds.Select(x=>x.PlayerOneSerie.Player.Id) == rounds.Select(x=>x.Match.Winner.Id))
-                    {
-                        playerStatistics.MatchesWon += 1;
-                        playerStatistics.Matchesplayed += 1;
-                    }
-                    else if(rounds.Select(x=>x.PlayerTwoSerie.Player.Id) == rounds.Select(x=>x.Match.Winner.Id))
-                    {
-                        
-                    }
-                }
+                    Player = player
+                };
+
+                playerList.Add(playerStatistics);
             }
+
+            var competitionsThisYear = _repository.GetAllCompetitions().Where(x => x.Period.Starttime.Year == year && x.Period.Endtime.Year == year);
+
+            var playerWins = competitionsThisYear.SelectMany(c => c.Matches)
+                    .GroupBy(match => new { Match = match, WinnerId = match.WinnerId })
+                    .Select(g => new
+                    {
+                        PlayerId = g.Key.WinnerId,
+                        Wins = g.Count(),
+                        Played = g.Key.Match.Rounds.Take(1)
+                        .Select(r => r.PlayerOneSerie.PlayerId == g.Key.WinnerId || r.PlayerTwoSerie.PlayerId == g.Key.WinnerId)
+                        .Count(),
+                        Player = allPlayers.Single(p => p.Id == g.Key.WinnerId)
+                    });
+
+            var age = 46;
+
+            //foreach (var match in competition.Matches)
+            //{
+            //    playerList.ForEach(p => { p.Player.Id == match.WinnerId ? p.MatchesWon++ : p.MatchesWon; });
+            //}
+
+            //foreach (var rounds in competition.Matches.Select(x => x.Rounds))
+            //{
+            //    var playerStatistics = new PlayerStatistics();
+            //    if (rounds.Select(x => x.PlayerOneSerie.Player.Id) == rounds.Select(x => x.Match.Winner.Id))
+            //    {
+            //        playerStatistics.MatchesWon += 1;
+            //        playerStatistics.Matchesplayed += 1;
+            //    }
+            //    else if (rounds.Select(x => x.PlayerTwoSerie.Player.Id) == rounds.Select(x => x.Match.Winner.Id))
+            //    {
+
+            //    }
+            //}    
+
+            return playerWins.OrderByDescending(w => w.Wins).First().Player;
         }
-    }
+}
 }

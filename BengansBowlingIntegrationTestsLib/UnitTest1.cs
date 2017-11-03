@@ -3,6 +3,8 @@ using Xunit;
 using BengansBowlingHallDbLib.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using AccountabilityLib;
+using System;
 
 namespace BengansBowlingUnitTestsLib
 {
@@ -47,18 +49,26 @@ namespace BengansBowlingUnitTestsLib
             Assert.Equal("Danny", _system.GetMatchWinner(match2).Name);
         }
 
-        //[Fact]
-        //public void TestWinnerOfTheYear()
-        //{
-            //var match = repo.PlayMatch(1);
-            //var match2 = repo.PlayMatch(2);
-            //var match3 = repo.PlayMatch(3);
-            //var match4 = repo.PlayMatch(4);
-            //var match5 = repo.PlayMatch(5);
-            //var match6 = repo.PlayMatch(6);
-            //Assert.Equal(repo.Parties[1], match.Winner);
-            //Assert.IsType(Party, match.Winner);
-        //}
+        [Fact]
+        public void TestWinnerOfTheYear()
+        {
+
+            var matches = new List<Match>();
+            matches.Add(match1);
+            matches.Add(match2);
+            matches.Add(match3);
+            matches.Add(match4);
+            matches.Add(match5);
+            matches.Add(match6);
+
+            TimePeriod timePeriod = new TimePeriod();
+            timePeriod.Starttime = new DateTime(2017, 01, 05);
+            timePeriod.Endtime = new DateTime(2017, 12, 30);
+
+            _system.CreateCompetition("Bengans All Star", timePeriod, matches);
+
+            Assert.Equal("Danny", _system.GetWinnerOfTheYear(2017).Name);
+        }
 
         public Match CreateMatch(string player1Name, int player1score1, int player1score2,
             int player1score3, string player2Name, int player2score1, int player2score2,
@@ -66,16 +76,16 @@ namespace BengansBowlingUnitTestsLib
         {
             //Create MATCH 1
             //Create series
-            var serie1Id = _system.CreateSerie(_system.GetAllParties().Single(x => x.Name == player1Name), player1score1);
-            var serie2Id = _system.CreateSerie(_system.GetAllParties().Single(x => x.Name == player2Name), player2score1);
+            var serie1Id = _system.CreateSerie(_system.GetAllParties().First(x => x.Name == player1Name), player1score1);
+            var serie2Id = _system.CreateSerie(_system.GetAllParties().First(x => x.Name == player2Name), player2score1);
             var serie1 = _system.GetSerie(serie1Id);
             var serie2 = _system.GetSerie(serie2Id);
-            var serie3Id = _system.CreateSerie(_system.GetAllParties().Single(x => x.Name == player1Name), player1score2);
-            var serie4Id = _system.CreateSerie(_system.GetAllParties().Single(x => x.Name == player2Name), player2score2);
+            var serie3Id = _system.CreateSerie(_system.GetAllParties().First(x => x.Name == player1Name), player1score2);
+            var serie4Id = _system.CreateSerie(_system.GetAllParties().First(x => x.Name == player2Name), player2score2);
             var serie3 = _system.GetSerie(serie3Id);
             var serie4 = _system.GetSerie(serie4Id);
-            var serie5Id = _system.CreateSerie(_system.GetAllParties().Single(x => x.Name == player1Name), player1score3);
-            var serie6Id = _system.CreateSerie(_system.GetAllParties().Single(x => x.Name == player2Name), player2score3);
+            var serie5Id = _system.CreateSerie(_system.GetAllParties().First(x => x.Name == player1Name), player1score3);
+            var serie6Id = _system.CreateSerie(_system.GetAllParties().First(x => x.Name == player2Name), player2score3);
             var serie5 = _system.GetSerie(serie5Id);
             var serie6 = _system.GetSerie(serie6Id);
 
@@ -97,6 +107,6 @@ namespace BengansBowlingUnitTestsLib
             var matchId = _system.CreateMatch(roundList);
             return _system.GetMatch(matchId);
         }
-      
+
     }
 }
