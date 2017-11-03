@@ -55,11 +55,13 @@ namespace BengansBowlingHallDbLib
         public Serie CreateSerie(int score)
         {
             throw new NotImplementedException();
+
         }
 
         public void CreateMatch(Party player1, Party player2)
         {
             throw new NotImplementedException();
+
         }
     }
 }
