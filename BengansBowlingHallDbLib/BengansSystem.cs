@@ -59,12 +59,5 @@ namespace BengansBowlingHallDbLib
 
             return match.Rounds[0].PlayerTwoSerie.Player;
         }
-
-        public int GetSerieScore()
-        {
-            Random random = new Random();
-            var score = random.Next(50, 300);
-            return score;
-        }
     }
 }

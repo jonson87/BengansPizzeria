@@ -2,8 +2,6 @@ using BengansBowlingHallDbLib;
 using System;
 using AccountabilityLib;
 using Xunit;
-using System.Collections.Generic;
-using BengansBowlingHallDbLib.Interfaces;
 using BengansBowlingHallDbLib.Repositories;
 
 namespace BengansBowlingUnitTestsLib
