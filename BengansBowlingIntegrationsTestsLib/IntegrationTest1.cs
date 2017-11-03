@@ -53,7 +53,22 @@ namespace BengansBowlingIntegrationsTestsLib
             var serie2 = sut.GetSerie(serie2Id);
             var round1Id = sut.CreateRound(serie1, serie2);
             var round1 = sut.GetRound(round1Id);
-            var roundList = new List<Round>{round1};
+
+            var serie3Id = sut.CreateSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Benny").Result, 50);
+            var serie4Id = sut.CreateSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Danny").Result, 110);
+            var serie3 = sut.GetSerie(serie3Id);
+            var serie4 = sut.GetSerie(serie4Id);
+            var round2Id = sut.CreateRound(serie3, serie4);
+            var round2 = sut.GetRound(round2Id);
+
+            var serie5Id = sut.CreateSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Benny").Result, 230);
+            var serie6Id = sut.CreateSerie(_context.Parties.FirstOrDefaultAsync(x => x.Name == "Danny").Result, 110);
+            var serie5 = sut.GetSerie(serie5Id);
+            var serie6 = sut.GetSerie(serie6Id);
+            var round3Id = sut.CreateRound(serie5, serie6);
+            var round3 = sut.GetRound(round3Id);
+
+            var roundList = new List<Round>{round1, round2, round3 };
             var matchId = sut.CreateMatch(roundList);
             var match = sut.GetMatch(matchId);
             var timeperiod = new TimePeriod
@@ -65,7 +80,11 @@ namespace BengansBowlingIntegrationsTestsLib
             matchList.Add(match);
             var compId = sut.CreateCompetition("Bengans Tävling", timeperiod, matchList);
             var comp = _context.Competitions.FirstOrDefaultAsync(x => x.Id == compId).Result;
+
+            var matchRounds = _context.Matches.FirstOrDefaultAsync(x => x.Id == matchId).Result;
+            
             Assert.Equal("Bengans Tävling", comp.Name);
+            Assert.Equal(3, matchRounds.Rounds.Count);
         }
     }
 }
