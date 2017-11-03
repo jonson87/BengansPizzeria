@@ -17,30 +17,32 @@ namespace BengansBowlingHallDbLib
             _repository = repository;
         }
 
-        public void RegisterMember(string legalId, string name)
+        public int RegisterMember(string legalId, string name)
         {
-            _repository.CreateMember(legalId, name);
+            return _repository.CreateMember(legalId, name);
         }
 
-        public void RegisterMatch(Party player1, Party player2)
+        public int RegisterMatch(Party player1, Party player2)
         {
-           _repository.CreateMatch(player1, player2);
+           return _repository.CreateMatch(player1, player2);
         }     
 
-        public void RegisterCompetition(string name, TimePeriod period, List<Match> matches)
+        public int RegisterCompetition(string name, TimePeriod period, List<Match> matches)
         {
-            _repository.CreateCompetition(name, period, matches);
+            return _repository.CreateCompetition(name, period, matches);
         }
        
-        public void RegisterRound(int id, Serie serieOne, Serie serieTwo)
+        public int RegisterRound(Serie serieOne, Serie serieTwo)
         {
-            _repository.CreateRound(serieOne, serieTwo);
+            return _repository.CreateRound(serieOne, serieTwo);
         }
 
-        public void RegisterSerie(Party player, int score = 0)
+        public int RegisterSerie(Party player, int score = 0)
         {
-            _repository.CreateSerie(score, player);
+            return _repository.CreateSerie(score, player);
         }
+
+
 
         public Party GetMatchWinner(Match match)
         {
