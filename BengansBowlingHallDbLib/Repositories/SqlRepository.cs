@@ -88,7 +88,7 @@ namespace BengansBowlingHallDbLib
 
         public Party GetParty(int id)
         {
-            var party = _context.Parties.FirstOrDefault(x => x.PartyId == id);
+            var party = _context.Parties.FirstOrDefault(x => x.Id == id);
             return party;
         }
 

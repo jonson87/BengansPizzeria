@@ -79,7 +79,7 @@ namespace BengansBowlingHallDbLib
         //Serie management
         public int CreateSerie(Party player, int score = 0)
         {
-            return _repository.CreateSerie(score, player);
+            return _repository.CreateSerie(player);
         }
 
         public List<Serie> GetAllSeries()

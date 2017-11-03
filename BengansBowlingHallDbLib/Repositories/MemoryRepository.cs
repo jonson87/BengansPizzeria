@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using AccountabilityLib;
+using System.Linq;
 
 namespace BengansBowlingHallDbLib.Repositories
 {
@@ -65,12 +66,20 @@ namespace BengansBowlingHallDbLib.Repositories
 
         public Competition GetCompetition(int id)
         {
-            throw new NotImplementedException();
+            return Competitions.Single(x => x.Id == id);
         }
 
         //Match management
-        public void CreateMatch(Party player1, Party player2)
+        public int CreateMatch(List<Round> rounds)
         {
+            var match = new Match()
+            {
+                Id = Matches.Count + 1,
+                Rounds = rounds
+            };
+
+            Matches.Add(match);
+            return match.Id;
         }
 
         public List<Match> GetAllMatches()
@@ -78,10 +87,9 @@ namespace BengansBowlingHallDbLib.Repositories
             return Matches;
         }
 
-        public int CreateMatch(List<Round> rounds)
         public Match GetMatch(int id)
         {
-            throw new NotImplementedException();
+            return Matches.Single(x => x.Id == id);
         }
 
         //Party management
@@ -93,6 +101,7 @@ namespace BengansBowlingHallDbLib.Repositories
                 Name = name,
                 LegalId = legalId
             };
+
             Parties.Add(party);
             return party.Id;
         }
@@ -104,7 +113,7 @@ namespace BengansBowlingHallDbLib.Repositories
 
         public Party GetParty(int id)
         {
-            throw new NotImplementedException();
+            return Parties.Single(x => x.Id == id);
         }
 
         //Round management
@@ -131,7 +140,7 @@ namespace BengansBowlingHallDbLib.Repositories
 
         public Round GetRound(int id)
         {
-            throw new NotImplementedException();
+            return Rounds.Single(x => x.Id == id);
         }
 
         //Serie management
@@ -156,12 +165,7 @@ namespace BengansBowlingHallDbLib.Repositories
 
         public Serie GetSerie(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        int IBengansRepository.CreateMatch(Party player1, Party player2)
-        {
-            throw new NotImplementedException();
+            return Series.Single(x => x.Id == id);
         }
     }
 }
