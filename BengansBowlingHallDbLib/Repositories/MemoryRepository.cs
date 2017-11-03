@@ -47,10 +47,12 @@ namespace BengansBowlingHallDbLib.Repositories
         {
             var competition = new Competition()
             {
+                Id = Competitions.Count + 1,
                 Name = name,
                 Period = period,
                 Matches = matches
             };
+
             Competitions.Add(competition);
             return competition.Id;
         }
@@ -63,9 +65,13 @@ namespace BengansBowlingHallDbLib.Repositories
 
         public int CreateMember(string legalId, string name)
         {
-            var party = new Party {Name = name, LegalId = legalId};
+            var party = new Party
+            {                
+                Name = name,
+                LegalId = legalId
+            };
             Parties.Add(party);
-            return party.PartyId;
+            return party.Id;
         }
 
         public int CreateRound(Serie serieOne, Serie serieTwo)
