@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using AccountabilityLib;
 
 namespace BengansBowlingHallDbLib
@@ -9,7 +7,10 @@ namespace BengansBowlingHallDbLib
     {
         public int Id { get; set; }
         public int WinnerId { get; set; }
+        public int CompetitionId { get; set; }
+
         public Party Winner { get; set; }
         public List<Round> Rounds { get; set; }
+        public Competition Competition { get; set; }
     }
 }
