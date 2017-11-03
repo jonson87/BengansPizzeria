@@ -52,16 +52,17 @@ namespace BengansBowlingHallDbLib
             throw new NotImplementedException();
         }
 
-        public Serie CreateSerie(int score)
+        public Serie CreateSerie(int score, Party player)
         {
-            throw new NotImplementedException();
-
+            var serie = new Serie {Player = player, Score = score};
+            _context.Series.Add(serie);
+            _context.SaveChanges();
+            return serie;
         }
 
         public void CreateMatch(Party player1, Party player2)
         {
             throw new NotImplementedException();
-
         }
 
         public List<Party> GetAllParties()
@@ -85,11 +86,6 @@ namespace BengansBowlingHallDbLib
         }
 
         public List<Competition> GetAllCompetitions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CreateSerie(Serie serie)
         {
             throw new NotImplementedException();
         }

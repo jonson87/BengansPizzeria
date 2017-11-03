@@ -39,11 +39,9 @@ namespace BengansBowlingHallDbLib
             //_context.SaveChanges();
         }
 
-        public void RegisterSerie(int id, int score)
+        public void RegisterSerie(Party player, int score = 0)
         {
-            //var serie = new Serie {Score = score};
-            //Series.Add(serie);
-            //_context.SaveChanges();
+            _repository.CreateSerie(score, player);
         }
 
         public Party GetMatchWinner(Match match)

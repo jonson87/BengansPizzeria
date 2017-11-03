@@ -11,14 +11,12 @@ namespace BengansBowlingHallDbLib.Interfaces
         void CreateMatch(Party player1, Party player2);
         List<Match> GetAllMatches();
 
-        void CreateSerie(Serie serie);
+        Serie CreateSerie(int score, Party player);
         List<Serie> GetAllSeries();
 
         void CreateRound(Round round);
         List<Round> GetAllRounds();
 
-        Serie CreateSerie(int score);
-        Round CreateRound(Serie serieOne, Serie serieTwo);
         void CreateCompetition(string name, TimePeriod period, List<Match> matches);
         List<Competition> GetAllCompetitions();
     }
