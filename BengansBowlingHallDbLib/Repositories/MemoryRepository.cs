@@ -66,11 +66,12 @@ namespace BengansBowlingHallDbLib.Repositories
             Parties.Add(party);
         }
 
-        public void CreateRound(Round round)
+        public Round CreateRound(Serie serieOne, Serie serieTwo)
         {
+            throw new NotImplementedException();
         }
 
-        public void CreateSerie(Serie serie)
+        public Serie CreateSerie(int score)
         {
             throw new NotImplementedException();
         }

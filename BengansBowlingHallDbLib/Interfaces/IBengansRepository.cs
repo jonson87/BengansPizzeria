@@ -17,6 +17,8 @@ namespace BengansBowlingHallDbLib.Interfaces
         void CreateRound(Round round);
         List<Round> GetAllRounds();
 
+        Serie CreateSerie(int score);
+        Round CreateRound(Serie serieOne, Serie serieTwo);
         void CreateCompetition(string name, TimePeriod period, List<Match> matches);
         List<Competition> GetAllCompetitions();
     }

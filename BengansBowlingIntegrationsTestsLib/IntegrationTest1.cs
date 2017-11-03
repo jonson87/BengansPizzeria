@@ -32,20 +32,18 @@ namespace BengansBowlingIntegrationsTestsLib
 
         public void Seed()
         {
-            //var benny = sut.RegisterMember("87052060389", "Benny");
-            //sut.RegisterMember("87052234324", "Danny");
-            //sut.RegisterMember("87123523122", "Jonny");
-            //sut.RegisterMember("87052012312", "Donny");
-            //sut.RegisterMember("87063234112", "Fanny");
-
-            //sut.RegisterMatch()
+            sut.RegisterMember("87052060389", "Benny");
+            sut.RegisterMember("87052234324", "Danny");
+            sut.RegisterMember("87123523122", "Jonny");
+            sut.RegisterMember("87052012312", "Donny");
+            sut.RegisterMember("87063234112", "Fanny");
         }
 
         [Fact]
         public void GenerateMembers()
         {
-            //var parties = _context.Parties.ToListAsync().Result;
-            //Assert.Equal(4, parties.Count);
+            var parties = _context.Parties.ToListAsync().Result;
+            Assert.Equal(5, parties.Count);
         }
 
         [Fact]
