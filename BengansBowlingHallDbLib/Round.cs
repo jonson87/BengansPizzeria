@@ -8,7 +8,7 @@
         public int PlayerTwoSerieId { get; set; }     
 
         public Match Match { get; set; }
-        public Serie PlayerOneSerie { get; set; }
+        public Serie PlayerOneSerie { get; set; }   
         public Serie PlayerTwoSerie { get; set; }
     }
 }
