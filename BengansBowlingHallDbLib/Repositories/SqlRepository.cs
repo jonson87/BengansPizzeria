@@ -45,7 +45,7 @@ namespace BengansBowlingHallDbLib
             return round.Id;
         }
 
-        public int CreateSerie(int score, Party player)
+        public int CreateSerie(Party player, int score)
         {
             var serie = new Serie {Player = player, Score = score};
             _context.Series.Add(serie);
@@ -114,11 +114,6 @@ namespace BengansBowlingHallDbLib
         {
             var comp = _context.Competitions.FirstOrDefault(x => x.Id == id);
             return comp;
-        }
-
-        public int CreateSerie(Party player, int score = 0)
-        {
-            throw new NotImplementedException();
         }
     }
 }
