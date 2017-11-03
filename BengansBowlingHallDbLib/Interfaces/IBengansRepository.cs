@@ -13,7 +13,7 @@ namespace BengansBowlingHallDbLib.Interfaces
         Match GetMatch(int id);
         List<Match> GetAllMatches();
 
-        int CreateSerie(int score, Party player);
+        int CreateSerie(Party player, int score = 0);
         Serie GetSerie(int id);
         List<Serie> GetAllSeries();
 

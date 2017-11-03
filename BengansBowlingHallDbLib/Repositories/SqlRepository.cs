@@ -119,5 +119,10 @@ namespace BengansBowlingHallDbLib
         {
             throw new NotImplementedException();
         }
+
+        public int CreateSerie(Party player, int score = 0)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

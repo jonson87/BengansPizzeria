@@ -43,6 +43,7 @@ namespace BengansBowlingHallDbLib.Repositories
             }
         }
 
+        //Competition management
         public int CreateCompetition(string name, TimePeriod period, List<Match> matches)
         {
             var competition = new Competition()
@@ -57,76 +58,24 @@ namespace BengansBowlingHallDbLib.Repositories
             return competition.Id;
         }
 
-        //public void CreateMatch(Party player1, Party player2)
-        //{
-        //    var match = new Match { PlayerOne = player1, PlayerTwo = player2 };
-        //    Matches.Add(match);
-        //}
-
-        public int CreateMember(string legalId, string name)
+        public List<Competition> GetAllCompetitions()
         {
-            var party = new Party
-            {                
-                Name = name,
-                LegalId = legalId
-            };
-            Parties.Add(party);
-            return party.Id;
+            return Competitions;
         }
 
-        public int CreateRound(Serie serieOne, Serie serieTwo)
+        public Competition GetCompetition(int id)
         {
             throw new NotImplementedException();
         }
 
-        public int CreateSerie(int score)
+        //Match management
+        public void CreateMatch(Party player1, Party player2)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<Party> GetPlayers()
-        {
-            return Parties;
-        }
-
-        public int CreateMatch(Party player1, Party player2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Party> GetAllParties()
-        {
-            throw new NotImplementedException();
         }
 
         public List<Match> GetAllMatches()
         {
-            throw new NotImplementedException();
-        }
-
-        public List<Serie> GetAllSeries()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Round> GetAllRounds()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Competition> GetAllCompetitions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int CreateSerie(int score, Party player)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Party GetParty(int id)
-        {
-            throw new NotImplementedException();
+            return Matches;
         }
 
         public Match GetMatch(int id)
@@ -134,9 +83,49 @@ namespace BengansBowlingHallDbLib.Repositories
             throw new NotImplementedException();
         }
 
-        public Serie GetSerie(int id)
+        //Party management
+        public int CreateMember(string legalId, string name)
+        {
+            var party = new Party
+            {
+                Id = Parties.Count + 1,
+                Name = name,
+                LegalId = legalId
+            };
+            Parties.Add(party);
+            return party.Id;
+        }
+
+        public List<Party> GetAllParties()
+        {
+            return Parties;
+        }
+
+        public Party GetParty(int id)
         {
             throw new NotImplementedException();
+        }
+
+        //Round management
+        public int CreateRound(Serie serieOne, Serie serieTwo)
+        {
+
+            var round = new Round()
+            {
+                Id = Rounds.Count + 1,
+                PlayerOneSerieId = serieOne.Id,
+                PlayerTwoSerieId = serieTwo.Id,
+                PlayerOneSerie = serieOne,
+                PlayerTwoSerie = serieTwo
+            };
+
+            Rounds.Add(round);
+            return round.Id;
+        }
+
+        public List<Round> GetAllRounds()
+        {
+            return Rounds;
         }
 
         public Round GetRound(int id)
@@ -144,7 +133,32 @@ namespace BengansBowlingHallDbLib.Repositories
             throw new NotImplementedException();
         }
 
-        public Competition GetCompetition(int id)
+        //Serie management
+        public int CreateSerie(Party player, int score = 0)
+        {
+            var serie = new Serie()
+            {
+                Id = Series.Count + 1,
+                PlayerId = player.Id,
+                Player = player,
+                Score = score
+            };
+
+            Series.Add(serie);
+            return serie.Id;
+        }       
+
+        public List<Serie> GetAllSeries()
+        {
+            return Series;
+        }       
+
+        public Serie GetSerie(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        int IBengansRepository.CreateMatch(Party player1, Party player2)
         {
             throw new NotImplementedException();
         }
