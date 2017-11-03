@@ -79,7 +79,7 @@ namespace BengansBowlingHallDbLib
         //Serie management
         public int CreateSerie(Party player, int score = 0)
         {
-            return _repository.CreateSerie(player);
+            return _repository.CreateSerie(player, score);
         }
 
         public List<Serie> GetAllSeries()
@@ -96,14 +96,17 @@ namespace BengansBowlingHallDbLib
         public Party GetMatchWinner(Match match)
         {
             int playerOneWonRounds = 0;
+            int playerTwoWonRounds = 0;
 
             foreach (var round in match.Rounds)
             {
                 if (round.PlayerOneSerie.Score > round.PlayerTwoSerie.Score)
                     playerOneWonRounds++;
+                else if (round.PlayerTwoSerie.Score > round.PlayerOneSerie.Score)
+                    playerTwoWonRounds++;
             }
 
-            if (playerOneWonRounds > 1)
+            if (playerOneWonRounds > playerTwoWonRounds)
             {
                 return match.Rounds[0].PlayerOneSerie.Player;
             }
