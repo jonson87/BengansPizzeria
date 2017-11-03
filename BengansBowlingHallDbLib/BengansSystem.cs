@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using AccountabilityLib;
 using BengansBowlingHallDbLib.Interfaces;
 
@@ -33,36 +31,7 @@ namespace BengansBowlingHallDbLib
         {
             _repository.CreateCompetition(name, period, matches);
         }
-
-        //Should use the lists/dbsets in _repository
-        //public Match PlayMatch(Match match)
-        //{
-        //    List<Round> rounds = new List<Round>();
-
-        //    if (match.Rounds != null && match.Rounds.Count != 0)
-        //    {
-        //        rounds = match.Rounds;
-
-        //        match.Rounds = new List<Round>();
-        //    }
-
-        //    else
-        //    {
-        //        for (int i = 1; i <= 3; i++)
-        //        {
-        //            var round = new Round();
-        //            round.SerieOne = new Serie { Score = GetSerieScore() };
-        //            round.SerieTwo = new Serie { Score = GetSerieScore() };
-
-        //            rounds.Add(round);
-        //        }
-        //    }
-
-        //    match.Winner = GetMatchWinner(match);
-
-        //    return match;
-        //}
-
+       
         public void RegisterRound(int id, Serie serieOne, Serie serieTwo)
         {
             //var round = new Round {SerieOne = serieOne, SerieTwo = serieTwo};
