@@ -83,7 +83,7 @@ namespace BengansBowlingHallDbLib.Repositories
             return Parties;
         }
 
-        public int CreateMatch(Party player1, Party player2)
+        public int CreateMatch(List<Round> rounds)
         {
             throw new NotImplementedException();
         }

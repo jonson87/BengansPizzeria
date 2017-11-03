@@ -9,7 +9,7 @@ namespace BengansBowlingHallDbLib.Interfaces
         Party GetParty(int id);
         List<Party> GetAllParties();
 
-        int CreateMatch(Party player1, Party player2);
+        int CreateMatch(List<Round> rounds);
         Match GetMatch(int id);
         List<Match> GetAllMatches();
 
