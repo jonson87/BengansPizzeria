@@ -115,5 +115,10 @@ namespace BengansBowlingHallDbLib
             var comp = _context.Competitions.FirstOrDefault(x => x.Id == id);
             return comp;
         }
+
+        public int CreateSerie(Party player, int score = 0)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

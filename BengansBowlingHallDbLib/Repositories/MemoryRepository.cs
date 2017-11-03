@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using AccountabilityLib;
+using System.Linq;
 
 namespace BengansBowlingHallDbLib.Repositories
 {
@@ -43,6 +44,7 @@ namespace BengansBowlingHallDbLib.Repositories
             }
         }
 
+        //Competition management
         public int CreateCompetition(string name, TimePeriod period, List<Match> matches)
         {
             var competition = new Competition()
@@ -57,96 +59,113 @@ namespace BengansBowlingHallDbLib.Repositories
             return competition.Id;
         }
 
-        //public void CreateMatch(Party player1, Party player2)
-        //{
-        //    var match = new Match { PlayerOne = player1, PlayerTwo = player2 };
-        //    Matches.Add(match);
-        //}
-
-        public int CreateMember(string legalId, string name)
-        {
-            var party = new Party
-            {                
-                Name = name,
-                LegalId = legalId
-            };
-            Parties.Add(party);
-            return party.Id;
-        }
-
-        public int CreateRound(Serie serieOne, Serie serieTwo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int CreateSerie(int score)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Party> GetPlayers()
-        {
-            return Parties;
-        }
-
-        public int CreateMatch(List<Round> rounds)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Party> GetAllParties()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Match> GetAllMatches()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Serie> GetAllSeries()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Round> GetAllRounds()
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Competition> GetAllCompetitions()
         {
-            throw new NotImplementedException();
-        }
-
-        public int CreateSerie(int score, Party player)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Party GetParty(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Match GetMatch(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Serie GetSerie(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Round GetRound(int id)
-        {
-            throw new NotImplementedException();
+            return Competitions;
         }
 
         public Competition GetCompetition(int id)
         {
-            throw new NotImplementedException();
+            return Competitions.Single(x => x.Id == id);
+        }
+
+        //Match management
+        public int CreateMatch(List<Round> rounds)
+        {
+            var match = new Match()
+            {
+                Id = Matches.Count + 1,
+                Rounds = rounds
+            };
+
+            Matches.Add(match);
+            return match.Id;
+        }
+
+        public List<Match> GetAllMatches()
+        {
+            return Matches;
+        }
+
+        public Match GetMatch(int id)
+        {
+            return Matches.Single(x => x.Id == id);
+        }
+
+        //Party management
+        public int CreateMember(string legalId, string name)
+        {
+            var party = new Party
+            {
+                Id = Parties.Count + 1,
+                Name = name,
+                LegalId = legalId
+            };
+
+            Parties.Add(party);
+            return party.Id;
+        }
+
+        public List<Party> GetAllParties()
+        {
+            return Parties;
+        }
+
+        public Party GetParty(int id)
+        {
+            return Parties.Single(x => x.Id == id);
+        }
+
+        //Round management
+        public int CreateRound(Serie serieOne, Serie serieTwo)
+        {
+
+            var round = new Round()
+            {
+                Id = Rounds.Count + 1,
+                PlayerOneSerieId = serieOne.Id,
+                PlayerTwoSerieId = serieTwo.Id,
+                PlayerOneSerie = serieOne,
+                PlayerTwoSerie = serieTwo
+            };
+
+            Rounds.Add(round);
+            return round.Id;
+        }
+
+        public List<Round> GetAllRounds()
+        {
+            return Rounds;
+        }
+
+        public Round GetRound(int id)
+        {
+            return Rounds.Single(x => x.Id == id);
+        }
+
+        //Serie management
+        public int CreateSerie(Party player, int score = 0)
+        {
+            var serie = new Serie()
+            {
+                Id = Series.Count + 1,
+                PlayerId = player.Id,
+                Player = player,
+                Score = score
+            };
+
+            Series.Add(serie);
+            return serie.Id;
+        }       
+
+        public List<Serie> GetAllSeries()
+        {
+            return Series;
+        }       
+
+        public Serie GetSerie(int id)
+        {
+            return Series.Single(x => x.Id == id);
         }
     }
 }
