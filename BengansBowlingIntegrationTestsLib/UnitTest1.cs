@@ -74,8 +74,8 @@ namespace BengansBowlingUnitTestsLib
             timePeriod.Endtime = new DateTime(2017, 12, 30);
 
             _system.CreateCompetition("Bengans All Star", timePeriod, matches);
-
-            Assert.Equal("Danny", _system.GetWinnerOfTheYear(2017).Name);
+            var champion = _system.GetWinnerOfTheYear(2017);
+            Assert.Equal("Danny", champion.Name);
         }
 
         public Match CreateMatch(string player1Name, int player1score1, int player1score2,
