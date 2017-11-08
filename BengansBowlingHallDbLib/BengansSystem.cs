@@ -94,7 +94,7 @@ namespace BengansBowlingHallDbLib
             return _repository.GetSerie(id);
         }
 
-        //Get winner
+        //Gets a specific match's winner
         public Party GetMatchWinner(Match match)
         {
             int playerOneWonRounds = 0;
@@ -116,6 +116,7 @@ namespace BengansBowlingHallDbLib
             return match.Rounds[0].PlayerTwoSerie.Player;
         }
 
+        //Gets the player with the best win/played ratio of a given year
         public Party GetWinnerOfTheYear(int year)
         {
 
@@ -131,6 +132,10 @@ namespace BengansBowlingHallDbLib
 
             foreach (var competition in competitionsThisYear)
             {
+                var playersWithWins = competition.Matches.Select(pw => pw.WinnerId).ToList();
+                var playersWithPlayedMatches = competition.Matches.SelectMany(pp => pp.Rounds.Take(1).Select(p => p.PlayerOneSerie.PlayerId)).ToList();
+                playersWithPlayedMatches.AddRange(competition.Matches.SelectMany(pp => pp.Rounds.Take(1).Select(p => p.PlayerTwoSerie.PlayerId)));
+
                 foreach (var playerId in playersWithWins.Distinct())
                 {
                     var wonMatches = playersWithWins.Count(x => x == playerId);

@@ -8,7 +8,7 @@ using System;
 
 namespace BengansBowlingUnitTestsLib
 {
-    public class UnitTest1
+    public class BengansSystemUnitTest
     {
         private BengansSystem _sut;
 
@@ -19,7 +19,7 @@ namespace BengansBowlingUnitTestsLib
         private Match match5;
         private Match match6;
 
-        public UnitTest1()
+        public BengansSystemUnitTest()
         {
             _sut = new BengansSystem(MemoryRepository.Instance);
 
