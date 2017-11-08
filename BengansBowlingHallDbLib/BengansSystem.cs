@@ -120,22 +120,23 @@ namespace BengansBowlingHallDbLib
         public Party GetWinnerOfTheYear(int year)
         {
             var competitionsThisYear = _repository.GetAllCompetitions().Where(x => x.Period.Starttime.Year == year && x.Period.Endtime.Year == year);
-
+            List<int> playersWithWins = new List<int>();
+            List<int> playersWithPlayedMatches = new List<int>();
             Dictionary<int, decimal> playersWinRatio = new Dictionary<int, decimal>();
 
             foreach (var competition in competitionsThisYear)
             {
-                var playersWithWins = competition.Matches.Select(pw => pw.WinnerId).ToList();
-                var playersWithPlayedMatches = competition.Matches.SelectMany(pp => pp.Rounds.Take(1).Select(p => p.PlayerOneSerie.PlayerId)).ToList();
+                playersWithWins.AddRange(competition.Matches.Select(pw => pw.WinnerId).ToList());
+                playersWithPlayedMatches.AddRange(competition.Matches.SelectMany(pp => pp.Rounds.Take(1).Select(p => p.PlayerOneSerie.PlayerId)).ToList());
                 playersWithPlayedMatches.AddRange(competition.Matches.SelectMany(pp => pp.Rounds.Take(1).Select(p => p.PlayerTwoSerie.PlayerId)));
+            }
 
-                foreach (var playerId in playersWithWins.Distinct())
-                {
-                    var wonMatches = playersWithWins.Count(x => x == playerId);
-                    var playedMatches = playersWithPlayedMatches.Count(p => p == playerId);
-                    var winRatio = wonMatches / (decimal)playedMatches;
-                    playersWinRatio.Add(playerId, winRatio);
-                }
+            foreach (var playerId in playersWithWins.Distinct())
+            {
+                var wonMatches = playersWithWins.Count(x => x == playerId);
+                var playedMatches = playersWithPlayedMatches.Count(p => p == playerId);
+                var winRatio = wonMatches / (decimal)playedMatches;
+                playersWinRatio.Add(playerId, winRatio);
             }
 
             playersWinRatio.OrderByDescending(x => x);
