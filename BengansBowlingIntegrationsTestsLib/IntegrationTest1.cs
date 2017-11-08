@@ -12,6 +12,7 @@ namespace BengansBowlingIntegrationsTestsLib
 {
     public class IntegrationTest1
     {
+        //TODO Ska vi gå mot context här?
         private BengansBowlingHallDbContext _context;
         private BengansSystem sut;
         private SqlRepository repo;
@@ -78,9 +79,9 @@ namespace BengansBowlingIntegrationsTestsLib
             };
             var matchList = new List<Match>();
             matchList.Add(match);
+
             var compId = sut.CreateCompetition("Bengans Tävling", timeperiod, matchList);
             var comp = _context.Competitions.FirstOrDefaultAsync(x => x.Id == compId).Result;
-
             var matchRounds = _context.Matches.FirstOrDefaultAsync(x => x.Id == matchId).Result;
             
             Assert.Equal("Bengans Tävling", comp.Name);

@@ -8,7 +8,7 @@ using System;
 
 namespace BengansBowlingUnitTestsLib
 {
-    public class UnitTest1
+    public class BengansSystemUnitTest
     {
         private BengansSystem _system;
 
@@ -19,7 +19,7 @@ namespace BengansBowlingUnitTestsLib
         private Match match5;
         private Match match6;
 
-        public UnitTest1()
+        public BengansSystemUnitTest()
         {
             _system = new BengansSystem(MemoryRepository.Instance);
 
@@ -74,8 +74,8 @@ namespace BengansBowlingUnitTestsLib
             timePeriod.Endtime = new DateTime(2017, 12, 30);
 
             _system.CreateCompetition("Bengans All Star", timePeriod, matches);
-            var champion = _system.GetWinnerOfTheYear(2017);
-            Assert.Equal("Danny", champion.Name);
+            var championOfTheYear = _system.GetWinnerOfTheYear(2017);
+            Assert.Equal("Danny", championOfTheYear.Name);
         }
 
         public Match CreateMatch(string player1Name, int player1score1, int player1score2,
