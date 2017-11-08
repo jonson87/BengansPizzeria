@@ -119,14 +119,7 @@ namespace BengansBowlingHallDbLib
         //Gets the player with the best win/played ratio of a given year
         public Party GetWinnerOfTheYear(int year)
         {
-
             var competitionsThisYear = _repository.GetAllCompetitions().Where(x => x.Period.Starttime.Year == year && x.Period.Endtime.Year == year);
-
-            var mat = _repository.GetAllMatches();
-
-            var playersWithWins =  mat.Select(pw => pw.WinnerId).ToList();
-            var playersWithPlayedMatches = mat.SelectMany(pp => pp.Rounds.Take(1).Select(p => p.PlayerOneSerie.PlayerId)).ToList();
-            playersWithPlayedMatches.AddRange(mat.SelectMany(pp => pp.Rounds.Take(1).Select(p => p.PlayerTwoSerie.PlayerId)));
 
             Dictionary<int, decimal> playersWinRatio = new Dictionary<int, decimal>();
 
