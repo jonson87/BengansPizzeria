@@ -2,6 +2,7 @@
 using AccountabilityLib;
 using System.Linq;
 using BengansBowlingHallDbLib.Interfaces;
+using System;
 
 namespace BengansBowlingHallDbLib
 {
@@ -122,20 +123,20 @@ namespace BengansBowlingHallDbLib
             allPlayers = _repository.GetAllParties();
 
             //Move all players to the statistics list
-            foreach (var player in allPlayers)
-            {
-                var playerStatistics = new PlayerStatistics()
-                {
-                    Player = player
-                };
+            //foreach (var player in allPlayers)
+            //{
+            //    var playerStatistics = new PlayerStatistics()
+            //    {
+            //        Player = player
+            //    };
 
-                playerList.Add(playerStatistics);
-            }
+            //    playerList.Add(playerStatistics);
+            //}
 
             var competitionsThisYear = _repository.GetAllCompetitions().Where(x => x.Period.Starttime.Year == year && x.Period.Endtime.Year == year);
 
             var playerWins = competitionsThisYear.SelectMany(c => c.Matches)
-                    .GroupBy(match => new { Match = match, WinnerId = match.WinnerId })
+                    .GroupBy(match => new { WinnerId = match.WinnerId, Match = match })
                     .Select(g => new
                     {
                         PlayerId = g.Key.WinnerId,
@@ -145,6 +146,46 @@ namespace BengansBowlingHallDbLib
                         .Count(),
                         Player = allPlayers.Single(p => p.Id == g.Key.WinnerId)
                     });
+
+            var allMatches = _repository.GetAllMatches();
+
+            //var playerWinsYeah = competitionsThisYear.SelectMany(c => c.Matches)
+            //        .GroupBy(match => new { WinnerId = match.WinnerId })
+            //        .Select(g => new
+            //        {
+            //            PlayerId = g.Key.WinnerId,
+            //            Wins = g.Count(),
+            //            Played = allMatches.ForEach(x => x.Rounds.Take(1)
+            //            .Select(r => r.PlayerOneSerie.PlayerId == g.Key.WinnerId || r.PlayerTwoSerie.PlayerId == g.Key.WinnerId))
+            //            .Count(),
+            //            Player = allPlayers.Single(p => p.Id == g.Key.WinnerId)
+            //        });
+            
+
+            var mat = _repository.GetAllMatches();
+
+            var playersWithWins =  mat.Select(pw => pw.WinnerId).ToList();
+            var playersWithPlayedMatches = mat.SelectMany(pp => pp.Rounds.Take(1).Select(p => p.PlayerOneSerie.PlayerId)).ToList();
+            playersWithPlayedMatches.AddRange(mat.SelectMany(pp => pp.Rounds.Take(1).Select(p => p.PlayerTwoSerie.PlayerId)));
+
+            Dictionary<int, decimal> playersWinRatio = new Dictionary<int, decimal>();
+
+            foreach (var competition in competitionsThisYear)
+            {
+                foreach (var playerId in playersWithWins.Distinct())
+                {
+                    var wonMatches = playersWithWins.Count(x => x == playerId);
+                    var playedMatches = playersWithPlayedMatches.Count(p => p == playerId);
+                    var winRatio = wonMatches / (decimal)playedMatches;
+                    playersWinRatio.Add(playerId, winRatio);
+                }
+            }
+
+            playersWinRatio.OrderByDescending(x => x);
+            var winnerOfTheYearId = playersWinRatio.First().Key;
+
+            return _repository.GetParty(winnerOfTheYearId);
+            
 
             //foreach (var competition in competitionsThisYear)
             //{
@@ -161,7 +202,9 @@ namespace BengansBowlingHallDbLib
             //        });
             //}
 
-            return playerWins.OrderByDescending(p => p.Wins/p.Played).First().Player;
+            //var winRatio = playerWins.OrderByDescending(p => p.Wins / p.Played);
+            //return playerWins.OrderByDescending(p => p.Wins/p.Played).First().Player;
+            //return null;
         }
     }
 }
