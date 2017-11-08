@@ -32,7 +32,7 @@ namespace BengansBowlingIntegrationsTestsLib
         public void Seed()
         {
             sut.CreateMember("87052060389", "Benny");
-            sut.CreateMember("87052234324", "Danny");
+            sut.CreateMember("87052234324", "Lisa");
             sut.CreateMember("87123523122", "Jonny");
             sut.CreateMember("87052012312", "Donny");
             sut.CreateMember("87063234112", "Fanny");
@@ -41,7 +41,7 @@ namespace BengansBowlingIntegrationsTestsLib
         [Fact]
         public void GenerateMembers()
         {
-            var parties = _context.Parties.ToListAsync().Result;
+            var parties = sut.GetAllParties();
             Assert.Equal(5, parties.Count);
         }
 

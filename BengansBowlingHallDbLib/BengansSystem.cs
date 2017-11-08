@@ -119,6 +119,7 @@ namespace BengansBowlingHallDbLib
         //Gets the player with the best win/played ratio of a given year
         public Party GetWinnerOfTheYear(int year)
         {
+
             var competitionsThisYear = _repository.GetAllCompetitions().Where(x => x.Period.Starttime.Year == year && x.Period.Endtime.Year == year);
             List<int> playersWithWins = new List<int>();
             List<int> playersWithPlayedMatches = new List<int>();
@@ -141,23 +142,6 @@ namespace BengansBowlingHallDbLib
 
             playersWinRatio.OrderByDescending(x => x);
             var winnerOfTheYearId = playersWinRatio.First().Key;
-
-            //Mattias Linq
-
-            //var playerList = new List<PlayerStatistics>();
-            //var allPlayers = new List<Party>();
-            //allPlayers = _repository.GetAllParties();
-            //var playerWins = competitionsThisYear.SelectMany(c => c.Matches)
-            //        .GroupBy(match => new { WinnerId = match.WinnerId, Match = match })
-            //        .Select(g => new
-            //        {
-            //            PlayerId = g.Key.WinnerId,
-            //            Wins = g.Count(),
-            //            Played = g.Key.Match.Rounds.Take(1)
-            //            .Select(r => r.PlayerOneSerie.PlayerId == g.Key.WinnerId || r.PlayerTwoSerie.PlayerId == g.Key.WinnerId)
-            //            .Count(),
-            //            Player = allPlayers.Single(p => p.Id == g.Key.WinnerId)
-            //        });
 
             return _repository.GetParty(winnerOfTheYearId);
         }
