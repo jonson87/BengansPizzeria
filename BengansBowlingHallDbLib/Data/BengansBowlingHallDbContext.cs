@@ -11,15 +11,6 @@ namespace BengansBowlingHallDbLib.Data
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            //base.OnModelCreating(builder);
-            //builder.Entity<Serie>()
-            //    .HasKey(x => x.Round.PlayerOneSerieId);
-            //builder.Entity<Serie>()
-            //    .HasKey(x => x.Round.PlayerTwoSerieId);
-        }
-
         public DbSet<Party> Parties { get; set; }
         public DbSet<Accountability> Accountabilities { get; set; }
         public DbSet<AccountabilityType> AccountabilityTypes { get; set; }

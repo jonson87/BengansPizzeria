@@ -58,7 +58,7 @@ namespace BengansBowlingUnitTestsLib
         }
 
         [Fact]
-        public void TestWinnerOfTheYear()
+        public void TestChampionOfTheYear()
         {
 
             var matches = new List<Match>();
