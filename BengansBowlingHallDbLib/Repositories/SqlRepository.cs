@@ -53,9 +53,9 @@ namespace BengansBowlingHallDbLib
             return serie.Id;
         }
 
-        public int CreateMatch(List<Round> rounds, Party winner = null)
+        public int CreateMatch(List<Round> rounds,Lane lane, Party winner = null)
         {
-            var match = new Match { Rounds = rounds};
+            var match = new Match { Rounds = rounds, Lane = lane};
 
             if(winner != null)
             {
@@ -66,6 +66,14 @@ namespace BengansBowlingHallDbLib
             _context.Matches.Add(match);
             _context.SaveChanges();
             return match.Id;
+        }
+
+        public int CreateLane(int laneNumber)
+        {
+            var lane = new Lane {LaneNumber = laneNumber};
+            _context.Lanes.Add(lane);
+            _context.SaveChanges();
+            return lane.Id;
         }
 
         public List<Party> GetAllParties()
@@ -91,6 +99,11 @@ namespace BengansBowlingHallDbLib
         public List<Competition> GetAllCompetitions()
         {
             return _context.Competitions.ToList();
+        }
+
+        public List<Lane> GetAllLanes()
+        {
+            return _context.Lanes.ToList();
         }
 
         public Party GetParty(int id)
@@ -121,6 +134,11 @@ namespace BengansBowlingHallDbLib
         {
             var comp = _context.Competitions.FirstOrDefault(x => x.Id == id);
             return comp;
+        }
+
+        public Lane GetLane(int id)
+        {
+            return _context.Lanes.FirstOrDefault(x => x.Id == id);
         }
     }
 }

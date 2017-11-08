@@ -16,6 +16,7 @@ namespace BengansBowlingHallDbLib.Repositories
         public List<Round> Rounds;
         public List<Serie> Series;
         public List<Competition> Competitions { get; set; }
+        public List<Lane> Lanes { get; set; }
 
         public MemoryRepository()
         {
@@ -24,6 +25,7 @@ namespace BengansBowlingHallDbLib.Repositories
             Rounds = new List<Round>();
             Series = new List<Serie>();
             Competitions = new List<Competition>();
+            Lanes = new List<Lane>();
         }
 
         public static MemoryRepository Instance
@@ -70,14 +72,15 @@ namespace BengansBowlingHallDbLib.Repositories
         }
 
         //Match management
-        public int CreateMatch(List<Round> rounds, Party winner = null)
+        public int CreateMatch(List<Round> rounds,Lane lane, Party winner = null)
         {
             var match = new Match()
             {
                 Id = Matches.Count + 1,
                 Rounds = rounds,
                 Winner = winner,
-                WinnerId = winner.Id
+                WinnerId = winner.Id,
+                Lane = lane
             };
 
             Matches.Add(match);
@@ -168,6 +171,24 @@ namespace BengansBowlingHallDbLib.Repositories
         public Serie GetSerie(int id)
         {
             return Series.Single(x => x.Id == id);
+        }
+
+        //Lane Management
+        public int CreateLane(int laneNumber)
+        {
+            var lane = new Lane { Id = Lanes.Count + 1, LaneNumber = laneNumber };
+            Lanes.Add(lane);
+            return lane.Id;
+        }
+
+        public Lane GetLane(int id)
+        {
+            return Lanes.Single(x => x.Id == id);
+        }
+
+        public List<Lane> GetAllLanes()
+        {
+            return Lanes;
         }
     }
 }

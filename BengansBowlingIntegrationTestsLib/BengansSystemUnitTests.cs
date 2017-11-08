@@ -8,7 +8,7 @@ using System;
 
 namespace BengansBowlingUnitTestsLib
 {
-    public class BengansSystemUnitTest
+    public class BengansSystemUnitTests
     {
         private BengansSystem _sut;
 
@@ -19,7 +19,7 @@ namespace BengansBowlingUnitTestsLib
         private Match match5;
         private Match match6;
 
-        public BengansSystemUnitTest()
+        public BengansSystemUnitTests()
         {
             _sut = new BengansSystem(MemoryRepository.Instance);
 
@@ -96,7 +96,9 @@ namespace BengansBowlingUnitTestsLib
             var serie6Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player2Name), player2score3);
             var serie5 = _sut.GetSerie(serie5Id);
             var serie6 = _sut.GetSerie(serie6Id);
-
+            //Create lane
+            var laneId = _sut.CreateLane(1);
+            var lane = _sut.GetLane(1);
             //Create rounds
             var round1Id = _sut.CreateRound(serie1, serie2);
             var round2Id = _sut.CreateRound(serie3, serie4);
@@ -112,7 +114,7 @@ namespace BengansBowlingUnitTestsLib
             roundList.Add(round3);
 
             //Create match
-            var matchId = _sut.CreateMatch(roundList, winner);
+            var matchId = _sut.CreateMatch(roundList,lane, winner);
             return _sut.GetMatch(matchId);
         }
 
