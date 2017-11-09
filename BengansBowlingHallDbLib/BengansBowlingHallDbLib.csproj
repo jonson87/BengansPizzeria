@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AccountabilityInterfacesLib\AccountabilityInterfacesLib.csproj" />
     <ProjectReference Include="..\AccountabilityLib\AccountabilityLib.csproj" />
   </ItemGroup>
 
