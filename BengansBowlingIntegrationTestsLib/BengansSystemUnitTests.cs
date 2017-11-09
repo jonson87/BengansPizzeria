@@ -8,7 +8,7 @@ using System;
 
 namespace BengansBowlingUnitTestsLib
 {
-    public class BengansSystemUnitTest
+    public class BengansSystemUnitTests
     {
         private BengansSystem _sytem;
 
@@ -19,7 +19,7 @@ namespace BengansBowlingUnitTestsLib
         private Match match5;
         private Match match6;
 
-        public BengansSystemUnitTest()
+        public BengansSystemUnitTests()
         {
             _sytem = new BengansSystem(MemoryRepository.Instance);
 
@@ -84,19 +84,21 @@ namespace BengansBowlingUnitTestsLib
         {
             //Create MATCH 1
             //Create series
-            var serie1Id = _sytem.CreateSerie(_sytem.GetAllParties().First(x => x.Name == player1Name), player1score1);
-            var serie2Id = _sytem.CreateSerie(_sytem.GetAllParties().First(x => x.Name == player2Name), player2score1);
-            var serie1 = _sytem.GetSerie(serie1Id);
-            var serie2 = _sytem.GetSerie(serie2Id);
-            var serie3Id = _sytem.CreateSerie(_sytem.GetAllParties().First(x => x.Name == player1Name), player1score2);
-            var serie4Id = _sytem.CreateSerie(_sytem.GetAllParties().First(x => x.Name == player2Name), player2score2);
-            var serie3 = _sytem.GetSerie(serie3Id);
-            var serie4 = _sytem.GetSerie(serie4Id);
-            var serie5Id = _sytem.CreateSerie(_sytem.GetAllParties().First(x => x.Name == player1Name), player1score3);
-            var serie6Id = _sytem.CreateSerie(_sytem.GetAllParties().First(x => x.Name == player2Name), player2score3);
-            var serie5 = _sytem.GetSerie(serie5Id);
-            var serie6 = _sytem.GetSerie(serie6Id);
-
+            var serie1Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player1Name), player1score1);
+            var serie2Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player2Name), player2score1);
+            var serie1 = _sut.GetSerie(serie1Id);
+            var serie2 = _sut.GetSerie(serie2Id);
+            var serie3Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player1Name), player1score2);
+            var serie4Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player2Name), player2score2);
+            var serie3 = _sut.GetSerie(serie3Id);
+            var serie4 = _sut.GetSerie(serie4Id);
+            var serie5Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player1Name), player1score3);
+            var serie6Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player2Name), player2score3);
+            var serie5 = _sut.GetSerie(serie5Id);
+            var serie6 = _sut.GetSerie(serie6Id);
+            //Create lane
+            var laneId = _sut.CreateLane(1);
+            var lane = _sut.GetLane(1);
             //Create rounds
             var round1Id = _sytem.CreateRound(serie1, serie2);
             var round2Id = _sytem.CreateRound(serie3, serie4);
@@ -112,8 +114,8 @@ namespace BengansBowlingUnitTestsLib
             roundList.Add(round3);
 
             //Create match
-            var matchId = _sytem.CreateMatch(roundList, winner);
-            return _sytem.GetMatch(matchId);
+            var matchId = _sut.CreateMatch(roundList,lane, winner);
+            return _sut.GetMatch(matchId);
         }
 
     }

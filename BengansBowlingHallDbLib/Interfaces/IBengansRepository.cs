@@ -9,7 +9,7 @@ namespace BengansBowlingHallDbLib.Interfaces
         Party GetParty(int id);
         List<Party> GetAllParties();
 
-        int CreateMatch(List<Round> rounds, Party winner = null);
+        int CreateMatch(List<Round> rounds, Lane lane, Party winner = null);
         Match GetMatch(int id);
         List<Match> GetAllMatches();
 
@@ -24,5 +24,9 @@ namespace BengansBowlingHallDbLib.Interfaces
         int CreateCompetition(string name, TimePeriod period, List<Match> matches);
         Competition GetCompetition(int id);
         List<Competition> GetAllCompetitions();
+
+        int CreateLane(int laneNumber);
+        Lane GetLane(int id);
+        List<Lane> GetAllLanes();
     }
 }

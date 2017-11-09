@@ -31,9 +31,9 @@ namespace BengansBowlingHallDbLib
             return _repository.GetParty(id);
         }
 
-        public int CreateMatch(List<Round> rounds, Party winner = null)
+        public int CreateMatch(List<Round> rounds,Lane lane ,Party winner = null)
         {
-            return _repository.CreateMatch(rounds, winner);
+            return _repository.CreateMatch(rounds,lane, winner);
         }
 
         public List<Match> GetAllMatches()
@@ -92,6 +92,21 @@ namespace BengansBowlingHallDbLib
         public Serie GetSerie(int id)
         {
             return _repository.GetSerie(id);
+        }
+
+        public int CreateLane(int laneNumber)
+        {
+            return _repository.CreateLane(laneNumber);
+        }
+
+        public Lane GetLane(int id)
+        {
+            return _repository.GetLane(id);
+        }
+
+        public List<Lane> GetAllLanes(int id)
+        {
+            return _repository.GetAllLanes();
         }
 
         //Gets a specific match's winner

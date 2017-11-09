@@ -18,7 +18,7 @@ namespace BengansBowlingHallDbLib.Data
         public DbSet<Round> Rounds { get; set; }
         public DbSet<Serie> Series { get; set; }
         public DbSet<Competition> Competitions { get; set; }
-
+        public DbSet<Lane> Lanes { get; set; }
 
     }
 }
