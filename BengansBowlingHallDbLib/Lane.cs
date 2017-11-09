@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BengansBowlingHallDbLib
+﻿namespace BengansBowlingHallDbLib
 {
     public class Lane
     {

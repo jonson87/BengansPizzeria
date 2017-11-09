@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using AccountabilityLib;
 using BengansBowlingHallDbLib;
 using BengansBowlingHallDbLib.Data;
-using BengansBowlingHallDbLib.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
-using BengansBowlingHallDbLib.Repositories;
+using MeasurementLib;
 
 namespace BengansBowlingIntegrationsTestsLib
 {
-    public class BowlingSystemIntegrationTest
+    public class BowlingSystemIntegrationTests
     {
         private BengansBowlingHallDbContext _context;
         private BengansSystem _system;
         private SqlRepository _repository;
+        private List<Match> matchList = new List<Match>();
+        private List<Round> roundList = new List<Round>();
 
-        public BowlingSystemIntegrationTest()
+        public BowlingSystemIntegrationTests()
         {
             var optionsBuilder = new DbContextOptionsBuilder<BengansBowlingHallDbContext>();
             optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
@@ -36,6 +37,43 @@ namespace BengansBowlingIntegrationsTestsLib
         [Fact]
         public void CheckCompetitionInformation()
         {
+            //Create lane
+            var laneId = _system.CreateLane(1);
+            var lane = _system.GetLane(1);
+
+            //Create match
+            var matchId = _system.CreateMatch(roundList, lane);
+            var match = _system.GetMatch(matchId);
+
+            //Create time period
+            var timeperiod = new TimePeriod
+            {
+                Starttime = new DateTime(2017, 11, 01),
+                Endtime = new DateTime(2017, 11, 25)
+            };
+
+            matchList.Add(match);
+
+            //Create Competition
+            var competitionId = _system.CreateCompetition("Bästa Tävlingen", timeperiod, matchList);
+            var competition = _system.GetCompetition(competitionId);
+            var matchRounds = _system.GetMatch(matchId).Rounds;
+            
+            Assert.Equal("Bästa Tävlingen", competition.Name);
+            Assert.Equal(3, matchRounds.Count);
+            Assert.Equal(1, competition.Matches.Count);
+        }
+
+        public void Seed()
+        {
+            //Create players
+            _system.CreateMember("89052060389", "Benny");
+            _system.CreateMember("85052234324", "Max");
+            _system.CreateMember("95123523122", "Jonny");
+            _system.CreateMember("89052012312", "David");
+            _system.CreateMember("79063234112", "Peter");
+
+            //Create rounds with series
             var serie1Id = _system.CreateSerie(_system.GetParty(1), 50);
             var serie2Id = _system.CreateSerie(_system.GetParty(2), 70);
             var serie1 = _system.GetSerie(serie1Id);
@@ -57,37 +95,9 @@ namespace BengansBowlingIntegrationsTestsLib
             var round3Id = _system.CreateRound(serie5, serie6);
             var round3 = _system.GetRound(round3Id);
 
-            //Create lane
-            var laneId = _system.CreateLane(1);
-            var lane = _system.GetLane(1);
-
-            var roundList = new List<Round>{round1, round2, round3 };
-            var matchId = _system.CreateMatch(roundList, lane);
-            var match = _system.GetMatch(matchId);
-            var timeperiod = new TimePeriod
-            {
-                Starttime = new DateTime(2017, 11, 01),
-                Endtime = new DateTime(2017, 11, 25)
-            };
-            var matchList = new List<Match>();
-            matchList.Add(match);
-
-            var competitionId = _system.CreateCompetition("Bästa Tävlingen", timeperiod, matchList);
-            var competition = _system.GetCompetition(competitionId);
-            var matchRounds = _system.GetMatch(matchId);
-            
-            Assert.Equal("Bästa Tävlingen", competition.Name);
-            Assert.Equal(3, matchRounds.Rounds.Count);
-            Assert.Equal(1, competition.Matches.Count);
-        }
-
-        public void Seed()
-        {
-            _system.CreateMember("89052060389", "Benny");
-            _system.CreateMember("85052234324", "Max");
-            _system.CreateMember("95123523122", "Jonny");
-            _system.CreateMember("89052012312", "David");
-            _system.CreateMember("79063234112", "Peter");
+            roundList.Add(round1);
+            roundList.Add(round2);
+            roundList.Add(round3);
         }
     }
 }

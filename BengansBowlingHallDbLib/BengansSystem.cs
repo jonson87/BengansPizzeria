@@ -2,7 +2,7 @@
 using AccountabilityLib;
 using System.Linq;
 using BengansBowlingHallDbLib.Interfaces;
-using System;
+using MeasurementLib;
 
 namespace BengansBowlingHallDbLib
 {
@@ -31,6 +31,7 @@ namespace BengansBowlingHallDbLib
             return _repository.GetParty(id);
         }
 
+        //Match management
         public int CreateMatch(List<Round> rounds,Lane lane ,Party winner = null)
         {
             return _repository.CreateMatch(rounds,lane, winner);
@@ -94,6 +95,7 @@ namespace BengansBowlingHallDbLib
             return _repository.GetSerie(id);
         }
 
+        //Lane management
         public int CreateLane(int laneNumber)
         {
             return _repository.CreateLane(laneNumber);

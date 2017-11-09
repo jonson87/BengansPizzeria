@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace AccountabilityLib
+namespace MeasurementLib
 {
     public class TimePeriod
     {

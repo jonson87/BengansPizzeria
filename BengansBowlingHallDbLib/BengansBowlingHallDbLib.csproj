@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AccountabilityLib\AccountabilityLib.csproj" />
+    <ProjectReference Include="..\MeasurementLib\MeasurementLib.csproj" />
   </ItemGroup>
 
 </Project>
