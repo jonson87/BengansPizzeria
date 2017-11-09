@@ -57,8 +57,12 @@ namespace BengansBowlingIntegrationsTestsLib
             var round3Id = _system.CreateRound(serie5, serie6);
             var round3 = _system.GetRound(round3Id);
 
+            //Create lane
+            var laneId = _system.CreateLane(1);
+            var lane = _system.GetLane(1);
+
             var roundList = new List<Round>{round1, round2, round3 };
-            var matchId = _system.CreateMatch(roundList);
+            var matchId = _system.CreateMatch(roundList, lane);
             var match = _system.GetMatch(matchId);
             var timeperiod = new TimePeriod
             {

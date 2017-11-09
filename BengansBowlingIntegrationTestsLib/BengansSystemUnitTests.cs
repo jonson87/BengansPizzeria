@@ -10,7 +10,7 @@ namespace BengansBowlingUnitTestsLib
 {
     public class BengansSystemUnitTests
     {
-        private BengansSystem _sytem;
+        private BengansSystem _system;
 
         private Match match1;
         private Match match2;
@@ -21,7 +21,7 @@ namespace BengansBowlingUnitTestsLib
 
         public BengansSystemUnitTests()
         {
-            _sytem = new BengansSystem(MemoryRepository.Instance);
+            _system = new BengansSystem(MemoryRepository.Instance);
 
             Seed();
         } 
@@ -30,7 +30,7 @@ namespace BengansBowlingUnitTestsLib
         public void CheckMatchWinner()
         {
             //Test
-            Assert.Equal("Danny", _sytem.GetMatchWinner(match2).Name);
+            Assert.Equal("Danny", _system.GetMatchWinner(match2).Name);
         }
 
         [Fact]
@@ -49,25 +49,25 @@ namespace BengansBowlingUnitTestsLib
             timePeriod.Starttime = new DateTime(2017, 01, 05);
             timePeriod.Endtime = new DateTime(2017, 12, 30);
 
-            _sytem.CreateCompetition("Bengans All Star", timePeriod, matches);
+            _system.CreateCompetition("Bengans All Star", timePeriod, matches);
 
-            Assert.Equal("Danny", _sytem.GetWinnerOfTheYear(2017).Name);
+            Assert.Equal("Danny", _system.GetWinnerOfTheYear(2017).Name);
         }
 
         public void Seed()
         {
-            _sytem.CreateMember("87052060389", "Pelle");
-            _sytem.CreateMember("87052234324", "Danny");
-            _sytem.CreateMember("87123523122", "Bobby");
-            _sytem.CreateMember("87052012312", "Katrine");
-            _sytem.CreateMember("87063234112", "Mikael");
+            _system.CreateMember("87052060389", "Pelle");
+            _system.CreateMember("87052234324", "Danny");
+            _system.CreateMember("87123523122", "Bobby");
+            _system.CreateMember("87052012312", "Katrine");
+            _system.CreateMember("87063234112", "Mikael");
 
-            var winner1 = _sytem.GetAllParties().First(player => player.Name == "Danny");
-            var winner2 = _sytem.GetAllParties().First(player => player.Name == "Danny");
-            var winner3 = _sytem.GetAllParties().First(player => player.Name == "Danny");
-            var winner4 = _sytem.GetAllParties().First(player => player.Name == "Pelle");
-            var winner5 = _sytem.GetAllParties().First(player => player.Name == "Katrine");
-            var winner6 = _sytem.GetAllParties().First(player => player.Name == "Katrine");
+            var winner1 = _system.GetAllParties().First(player => player.Name == "Danny");
+            var winner2 = _system.GetAllParties().First(player => player.Name == "Danny");
+            var winner3 = _system.GetAllParties().First(player => player.Name == "Danny");
+            var winner4 = _system.GetAllParties().First(player => player.Name == "Pelle");
+            var winner5 = _system.GetAllParties().First(player => player.Name == "Katrine");
+            var winner6 = _system.GetAllParties().First(player => player.Name == "Katrine");
 
 
             match1 = CreateMatch("Pelle", 220, 300, 95, "Danny", 220, 300, 102, winner1);
@@ -84,29 +84,29 @@ namespace BengansBowlingUnitTestsLib
         {
             //Create MATCH 1
             //Create series
-            var serie1Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player1Name), player1score1);
-            var serie2Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player2Name), player2score1);
-            var serie1 = _sut.GetSerie(serie1Id);
-            var serie2 = _sut.GetSerie(serie2Id);
-            var serie3Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player1Name), player1score2);
-            var serie4Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player2Name), player2score2);
-            var serie3 = _sut.GetSerie(serie3Id);
-            var serie4 = _sut.GetSerie(serie4Id);
-            var serie5Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player1Name), player1score3);
-            var serie6Id = _sut.CreateSerie(_sut.GetAllParties().First(x => x.Name == player2Name), player2score3);
-            var serie5 = _sut.GetSerie(serie5Id);
-            var serie6 = _sut.GetSerie(serie6Id);
+            var serie1Id = _system.CreateSerie(_system.GetAllParties().First(x => x.Name == player1Name), player1score1);
+            var serie2Id = _system.CreateSerie(_system.GetAllParties().First(x => x.Name == player2Name), player2score1);
+            var serie1 = _system.GetSerie(serie1Id);
+            var serie2 = _system.GetSerie(serie2Id);
+            var serie3Id = _system.CreateSerie(_system.GetAllParties().First(x => x.Name == player1Name), player1score2);
+            var serie4Id = _system.CreateSerie(_system.GetAllParties().First(x => x.Name == player2Name), player2score2);
+            var serie3 = _system.GetSerie(serie3Id);
+            var serie4 = _system.GetSerie(serie4Id);
+            var serie5Id = _system.CreateSerie(_system.GetAllParties().First(x => x.Name == player1Name), player1score3);
+            var serie6Id = _system.CreateSerie(_system.GetAllParties().First(x => x.Name == player2Name), player2score3);
+            var serie5 = _system.GetSerie(serie5Id);
+            var serie6 = _system.GetSerie(serie6Id);
             //Create lane
-            var laneId = _sut.CreateLane(1);
-            var lane = _sut.GetLane(1);
+            var laneId = _system.CreateLane(1);
+            var lane = _system.GetLane(1);
             //Create rounds
-            var round1Id = _sytem.CreateRound(serie1, serie2);
-            var round2Id = _sytem.CreateRound(serie3, serie4);
-            var round3Id = _sytem.CreateRound(serie5, serie6);
+            var round1Id = _system.CreateRound(serie1, serie2);
+            var round2Id = _system.CreateRound(serie3, serie4);
+            var round3Id = _system.CreateRound(serie5, serie6);
 
-            var round1 = _sytem.GetRound(round1Id);
-            var round2 = _sytem.GetRound(round2Id);
-            var round3 = _sytem.GetRound(round3Id);
+            var round1 = _system.GetRound(round1Id);
+            var round2 = _system.GetRound(round2Id);
+            var round3 = _system.GetRound(round3Id);
 
             var roundList = new List<Round>();
             roundList.Add(round1);
@@ -114,8 +114,8 @@ namespace BengansBowlingUnitTestsLib
             roundList.Add(round3);
 
             //Create match
-            var matchId = _sut.CreateMatch(roundList,lane, winner);
-            return _sut.GetMatch(matchId);
+            var matchId = _system.CreateMatch(roundList,lane, winner);
+            return _system.GetMatch(matchId);
         }
 
     }
